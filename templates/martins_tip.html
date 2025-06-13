@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Martin's Tip - 하루마틴</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'noto': ['Noto Sans KR', 'sans-serif'],
+                    },
+                    colors: {
+                        'primary': '#237c6c',
+                        'primary-hover': '#317f74',
+                        'text-main': '#23494d',
+                        'text-sub': '#76849c',
+                        'bg-main': '#faecd8',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="font-noto" style="background-color: #faecd8;">
+    <!-- 헤더 -->
+    <header class="fixed top-0 left-0 right-0 z-50" style="background-color: rgba(250, 236, 216, 0.95); backdrop-filter: blur(10px);">
+        <nav class="container mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-4">
+                    <div>
+                        <h1 class="text-2xl font-bold">
+                            <a href="/" style="color: #23494d; text-decoration: none;">하루마틴</a>
+                        </h1>
+                        <p class="text-sm" style="color: #76849c;">딸아이와 함께하는 일상, 따뜻한 하루의 기록</p>
+                    </div>
+                </div>
+                <ul class="hidden md:flex space-x-8">
+                    <li><a href="/" class="font-medium hover:opacity-80 transition-opacity" style="color: #23494d;">Home</a></li>
+                    <li><a href="/martins-log" class="font-medium hover:opacity-80 transition-opacity" style="color: #23494d;">Martin's Log</a></li>
+                    <li><a href="/martins-tip" class="font-bold border-b-2 pb-1" style="color: #237c6c; border-color: #237c6c;">Martin's Tip</a></li>
+                    <li><a href="/#about" class="font-medium hover:opacity-80 transition-opacity" style="color: #23494d;">About</a></li>
+                    <li><a href="/admin" class="font-medium hover:opacity-80 transition-opacity" style="color: #23494d;">Admin</a></li>
+                </ul>
+                <div class="md:hidden">
+                    <button class="text-2xl" style="color: #23494d;">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- 페이지 헤더 -->
+    <section class="pt-32 pb-16" style="background: linear-gradient(135deg, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0.1) 100%);">
+        <div class="container mx-auto px-6 text-center">
+            <h1 class="text-5xl font-bold mb-4" style="color: #23494d;">
+                <i class="fas fa-lightbulb mr-4"></i>
+                Martin's Tip
+            </h1>
+            <p class="text-xl mb-6" style="color: #76849c;">아빠 마틴의 실전 육아 노하우를 공유합니다</p>
+            <div class="flex items-center justify-center space-x-2 text-sm" style="color: #76849c;">
+                <a href="/" class="hover:opacity-80" style="color: #237c6c;">Home</a> 
+                <i class="fas fa-chevron-right"></i> 
+                <span>Martin's Tip</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- 메인 콘텐츠 -->
+    <main class="py-16">
+        <div class="container mx-auto px-6">
+            <!-- 필터 및 검색 -->
+            <div class="flex flex-col lg:flex-row justify-between items-center mb-12 gap-6">
+                <div class="flex flex-wrap gap-3">
+                    <button class="tag-filter px-4 py-2 rounded-full font-medium transition-all duration-200 active" 
+                            data-tag="all" 
+                            style="background-color: #237c6c; color: white;">
+                        전체
+                    </button>
+                    <button class="tag-filter px-4 py-2 rounded-full font-medium transition-all duration-200" 
+                            data-tag="수면" 
+                            style="background-color: white; color: #23494d; border: 2px solid #237c6c;"
+                            onmouseover="this.style.backgroundColor='#237c6c'; this.style.color='white'" 
+                            onmouseout="if(!this.classList.contains('active')) { this.style.backgroundColor='white'; this.style.color='#23494d'; }">
+                        수면
+                    </button>
+                    <button class="tag-filter px-4 py-2 rounded-full font-medium transition-all duration-200" 
+                            data-tag="놀이" 
+                            style="background-color: white; color: #23494d; border: 2px solid #237c6c;"
+                            onmouseover="this.style.backgroundColor='#237c6c'; this.style.color='white'" 
+                            onmouseout="if(!this.classList.contains('active')) { this.style.backgroundColor='white'; this.style.color='#23494d'; }">
+                        놀이
+                    </button>
+                    <button class="tag-filter px-4 py-2 rounded-full font-medium transition-all duration-200" 
+                            data-tag="소통" 
+                            style="background-color: white; color: #23494d; border: 2px solid #237c6c;"
+                            onmouseover="this.style.backgroundColor='#237c6c'; this.style.color='white'" 
+                            onmouseout="if(!this.classList.contains('active')) { this.style.backgroundColor='white'; this.style.color='#23494d'; }">
+                        소통
+                    </button>
+                    <button class="tag-filter px-4 py-2 rounded-full font-medium transition-all duration-200" 
+                            data-tag="식사" 
+                            style="background-color: white; color: #23494d; border: 2px solid #237c6c;"
+                            onmouseover="this.style.backgroundColor='#237c6c'; this.style.color='white'" 
+                            onmouseout="if(!this.classList.contains('active')) { this.style.backgroundColor='white'; this.style.color='#23494d'; }">
+                        식사
+                    </button>
+                    <button class="tag-filter px-4 py-2 rounded-full font-medium transition-all duration-200" 
+                            data-tag="감정조절" 
+                            style="background-color: white; color: #23494d; border: 2px solid #237c6c;"
+                            onmouseover="this.style.backgroundColor='#237c6c'; this.style.color='white'" 
+                            onmouseout="if(!this.classList.contains('active')) { this.style.backgroundColor='white'; this.style.color='#23494d'; }">
+                        감정조절
+                    </button>
+                </div>
+                <div>
+                    <select class="difficulty-select px-4 py-3 rounded-2xl border-2 outline-none font-medium" 
+                            style="background-color: white; border-color: #237c6c; color: #23494d;">
+                        <option value="all">난이도 전체</option>
+                        <option value="쉬움">쉬움</option>
+                        <option value="보통">보통</option>
+                        <option value="어려움">어려움</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- 팁 그리드 -->
+            <div class="grid lg:grid-cols-2 gap-8 mb-16">
+                {% for tip in tips %}
+                <article class="tip-card-full bg-white rounded-3xl shadow-lg overflow-hidden transition-all duration-300 hover:shadow-xl hover:transform hover:scale-105" 
+                         data-tags="{{ tip.tags|join(',') }}" 
+                         data-difficulty="{{ tip.difficulty }}"
+                         style="border: 2px solid transparent;" 
+                         onmouseover="this.style.borderColor='#237c6c'" 
+                         onmouseout="this.style.borderColor='transparent'">
+                    <div class="relative">
+                        <img src="{{ tip.thumbnail }}" alt="{{ tip.title }}" class="w-full h-64 object-cover">
+                        <div class="absolute top-4 right-4 px-3 py-1 rounded-full text-sm font-bold text-white" 
+                             style="background-color: {% if tip.difficulty == '쉬움' %}#22c55e{% elif tip.difficulty == '보통' %}#f59e0b{% else %}#ef4444{% endif %};">
+                            {{ tip.difficulty }}
+                        </div>
+                        <div class="absolute top-4 left-4 px-3 py-1 rounded-full text-sm font-medium text-white" 
+                             style="background-color: rgba(35, 124, 108, 0.8);">
+                            <i class="fas fa-clock mr-1"></i> {{ tip.time }}
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <div class="mb-4">
+                            <h3 class="text-2xl font-bold mb-3" style="color: #23494d;">{{ tip.title }}</h3>
+                            <div class="flex flex-wrap gap-2 mb-3">
+                                {% for tag in tip.tags %}
+                                <span class="px-2 py-1 rounded-full text-xs font-medium text-white" 
+                                      style="background-color: #237c6c;">
+                                    #{{ tag }}
+                                </span>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        <p class="mb-4 leading-relaxed" style="color: #76849c;">{{ tip.summary }}</p>
+                        <div class="mb-6 leading-relaxed" style="color: #76849c;">{{ tip.content }}</div>
+                        <div class="flex items-center justify-between mb-6">
+                            <div class="flex items-center space-x-4" style="color: #76849c;">
+                                <span class="flex items-center">
+                                    <i class="fas fa-heart mr-2"></i> 24
+                                </span>
+                                <span class="flex items-center">
+                                    <i class="fas fa-bookmark mr-2"></i> 12
+                                </span>
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                <div class="flex text-yellow-400">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                                <span class="font-medium" style="color: #23494d;">4.8</span>
+                            </div>
+                        </div>
+                        <div class="flex gap-3">
+                            <a href="/post/{{ tip.id }}" class="flex-1 px-4 py-3 text-white font-semibold rounded-2xl transition-all duration-200 hover:shadow-lg text-center" 
+                               style="background-color: #237c6c;" 
+                               onmouseover="this.style.backgroundColor='#317f74'" 
+                               onmouseout="this.style.backgroundColor='#237c6c'">
+                                <i class="fas fa-book-open mr-2"></i> 전체 읽기
+                            </a>
+                            <button onclick="bookmarkTip('{{ tip.id }}')" 
+                                    class="px-4 py-3 font-semibold rounded-2xl transition-all duration-200 border-2" 
+                                    style="color: #237c6c; border-color: #237c6c; background-color: white;" 
+                                    onmouseover="this.style.backgroundColor='#237c6c'; this.style.color='white'" 
+                                    onmouseout="this.style.backgroundColor='white'; this.style.color='#237c6c'"
+                                    title="북마크">
+                                <i class="fas fa-bookmark"></i>
+                            </button>
+                            <button onclick="sharePost('{{ tip.id }}', '{{ tip.title }}')" 
+                                    class="px-4 py-3 font-semibold rounded-2xl transition-all duration-200 border-2" 
+                                    style="color: #237c6c; border-color: #237c6c; background-color: white;" 
+                                    onmouseover="this.style.backgroundColor='#237c6c'; this.style.color='white'" 
+                                    onmouseout="this.style.backgroundColor='white'; this.style.color='#237c6c'"
+                                    title="공유하기">
+                                <i class="fas fa-share"></i>
+                            </button>
+                        </div>
+                    </div>
+                </article>
+                {% endfor %}
+            </div>
+
+            <!-- 팁 제안 섹션 -->
+            <div class="bg-white rounded-3xl shadow-lg p-8 text-center mb-16" style="border: 2px solid #237c6c;">
+                <h3 class="text-2xl font-bold mb-4" style="color: #23494d;">
+                    <i class="fas fa-lightbulb mr-3"></i>
+                    나만의 육아 팁이 있나요?
+                </h3>
+                <p class="text-lg mb-6" style="color: #76849c;">다른 부모님들과 소중한 경험을 나눠주세요!</p>
+                <button class="px-8 py-4 text-white font-bold rounded-2xl transition-all duration-200 hover:shadow-lg transform hover:scale-105" 
+                        style="background-color: #237c6c;" 
+                        onmouseover="this.style.backgroundColor='#317f74'" 
+                        onmouseout="this.style.backgroundColor='#237c6c'">
+                    <i class="fas fa-plus mr-2"></i> 팁 제안하기
+                </button>
+            </div>
+        </div>
+
+        <!-- 인기 팁 섹션 -->
+        <section class="py-20" style="background-color: rgba(255, 255, 255, 0.3);">
+            <div class="container mx-auto px-6">
+                <h2 class="text-4xl font-bold text-center mb-16" style="color: #23494d;">
+                    <i class="fas fa-fire mr-3"></i>
+                    이번 주 인기 팁
+                </h2>
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div class="bg-white rounded-3xl shadow-lg p-6 transition-all duration-300 hover:shadow-xl hover:transform hover:scale-105" 
+                         style="border: 2px solid transparent;" 
+                         onmouseover="this.style.borderColor='#237c6c'" 
+                         onmouseout="this.style.borderColor='transparent'">
+                        <div class="flex items-center mb-4">
+                            <div class="w-12 h-12 rounded-full flex items-center justify-center text-white font-bold text-xl mr-4" 
+                                 style="background-color: #237c6c;">
+                                1
+                            </div>
+                            <div class="flex-1">
+                                <h4 class="text-lg font-bold" style="color: #23494d;">잠투정 줄이는 3가지 팁</h4>
+                            </div>
+                        </div>
+                        <p class="mb-4 leading-relaxed" style="color: #76849c;">일정한 루틴으로 아이의 수면 패턴을 개선해보세요</p>
+                        <div class="flex items-center space-x-4" style="color: #76849c;">
+                            <span class="flex items-center">
+                                <i class="fas fa-heart mr-2"></i> 156
+                            </span>
+                            <span class="flex items-center">
+                                <i class="fas fa-eye mr-2"></i> 1,234
+                            </span>
+                        </div>
+                    </div>
+                    <div class="bg-white rounded-3xl shadow-lg p-6 transition-all duration-300 hover:shadow-xl hover:transform hover:scale-105" 
+                         style="border: 2px solid transparent;" 
+                         onmouseover="this.style.borderColor='#237c6c'" 
+                         onmouseout="this.style.borderColor='transparent'">
+                        <div class="flex items-center mb-4">
+                            <div class="w-12 h-12 rounded-full flex items-center justify-center text-white font-bold text-xl mr-4" 
+                                 style="background-color: #237c6c;">
+                                2
+                            </div>
+                            <div class="flex-1">
+                                <h4 class="text-lg font-bold" style="color: #23494d;">아이와의 소통법</h4>
+                            </div>
+                        </div>
+                        <p class="mb-4 leading-relaxed" style="color: #76849c;">5살 아이와 더 깊이 소통하는 방법을 알아보세요</p>
+                        <div class="flex items-center space-x-4" style="color: #76849c;">
+                            <span class="flex items-center">
+                                <i class="fas fa-heart mr-2"></i> 142
+                            </span>
+                            <span class="flex items-center">
+                                <i class="fas fa-eye mr-2"></i> 987
+                            </span>
+                        </div>
+                    </div>
+                    <div class="bg-white rounded-3xl shadow-lg p-6 transition-all duration-300 hover:shadow-xl hover:transform hover:scale-105" 
+                         style="border: 2px solid transparent;" 
+                         onmouseover="this.style.borderColor='#237c6c'" 
+                         onmouseout="this.style.borderColor='transparent'">
+                        <div class="flex items-center mb-4">
+                            <div class="w-12 h-12 rounded-full flex items-center justify-center text-white font-bold text-xl mr-4" 
+                                 style="background-color: #237c6c;">
+                                3
+                            </div>
+                            <div class="flex-1">
+                                <h4 class="text-lg font-bold" style="color: #23494d;">창의력 키우는 놀이법</h4>
+                            </div>
+                        </div>
+                        <p class="mb-4 leading-relaxed" style="color: #76849c;">집에서 쉽게 할 수 있는 창의 놀이 아이디어</p>
+                        <div class="flex items-center space-x-4" style="color: #76849c;">
+                            <span class="flex items-center">
+                                <i class="fas fa-heart mr-2"></i> 128
+                            </span>
+                            <span class="flex items-center">
+                                <i class="fas fa-eye mr-2"></i> 856
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA 섹션 -->
+        <section class="py-20">
+            <div class="container mx-auto px-6 text-center">
+                <div class="max-w-2xl mx-auto">
+                    <h2 class="text-4xl font-bold mb-4" style="color: #23494d;">더 많은 육아 팁이 필요하다면?</h2>
+                    <p class="text-xl mb-8" style="color: #76849c;">유튜브에서 실전 영상으로 만나보세요!</p>
+                    <a href="https://www.youtube.com/channel/UC3xaz_6w0aI0pVKuJ2gAXnA" 
+                       class="inline-flex items-center justify-center px-12 py-5 text-white font-bold text-lg rounded-3xl transition-all duration-200 hover:shadow-xl transform hover:scale-105" 
+                       style="background-color: #237c6c;" 
+                       onmouseover="this.style.backgroundColor='#317f74'" 
+                       onmouseout="this.style.backgroundColor='#237c6c'"
+                       target="_blank">
+                        <i class="fab fa-youtube mr-3 text-xl"></i> 유튜브 채널 보기
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- 푸터 -->
+    <footer class="py-16" style="background-color: rgba(35, 73, 77, 0.05);">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-center mb-8">
+                <div class="mb-6 md:mb-0">
+                    <h3 class="text-2xl font-bold mb-2" style="color: #23494d;">하루마틴</h3>
+                    <p style="color: #76849c;">운영자: 아빠 마틴</p>
+                    <p style="color: #76849c;">연락처: <a href="mailto:martin@harumatin.blog" class="hover:opacity-80" style="color: #237c6c;">martin@harumatin.blog</a></p>
+                </div>
+                <div class="flex space-x-6">
+                    <a href="https://instagram.com/harumatin" target="_blank" 
+                       class="w-12 h-12 rounded-full flex items-center justify-center text-white text-xl transition-all duration-200 hover:transform hover:scale-110" 
+                       style="background-color: #237c6c;" 
+                       onmouseover="this.style.backgroundColor='#317f74'" 
+                       onmouseout="this.style.backgroundColor='#237c6c'">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="https://www.youtube.com/channel/UC3xaz_6w0aI0pVKuJ2gAXnA" target="_blank" 
+                       class="w-12 h-12 rounded-full flex items-center justify-center text-white text-xl transition-all duration-200 hover:transform hover:scale-110" 
+                       style="background-color: #237c6c;" 
+                       onmouseover="this.style.backgroundColor='#317f74'" 
+                       onmouseout="this.style.backgroundColor='#237c6c'">
+                        <i class="fab fa-youtube"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="text-center pt-8 border-t" style="border-color: rgba(35, 73, 77, 0.1);">
+                <p style="color: #76849c;">&copy; 2025 하루마틴. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // 태그 필터링 기능
+        document.addEventListener('DOMContentLoaded', function() {
+            const tagFilters = document.querySelectorAll('.tag-filter');
+            const tipCards = document.querySelectorAll('.tip-card-full');
+            const difficultySelect = document.querySelector('.difficulty-select');
+
+            // 태그 필터
+            tagFilters.forEach(filter => {
+                filter.addEventListener('click', function() {
+                    const selectedTag = this.dataset.tag;
+                    
+                    // 활성 상태 변경
+                    tagFilters.forEach(f => {
+                        f.classList.remove('active');
+                        f.style.backgroundColor = 'white';
+                        f.style.color = '#23494d';
+                    });
+                    this.classList.add('active');
+                    this.style.backgroundColor = '#237c6c';
+                    this.style.color = 'white';
+                    
+                    filterTips();
+                });
+            });
+
+            // 난이도 필터
+            difficultySelect.addEventListener('change', function() {
+                filterTips();
+            });
+
+            function filterTips() {
+                const selectedTag = document.querySelector('.tag-filter.active').dataset.tag;
+                const selectedDifficulty = difficultySelect.value;
+                
+                tipCards.forEach(card => {
+                    const cardTags = card.dataset.tags.split(',');
+                    const cardDifficulty = card.dataset.difficulty;
+                    
+                    const tagMatch = selectedTag === 'all' || cardTags.includes(selectedTag);
+                    const difficultyMatch = selectedDifficulty === 'all' || cardDifficulty === selectedDifficulty;
+                    
+                    if (tagMatch && difficultyMatch) {
+                        card.style.display = 'block';
+                        setTimeout(() => {
+                            card.style.opacity = '1';
+                            card.style.transform = 'translateY(0)';
+                        }, 100);
+                    } else {
+                        card.style.opacity = '0';
+                        card.style.transform = 'translateY(20px)';
+                        setTimeout(() => {
+                            card.style.display = 'none';
+                        }, 300);
+                    }
+                });
+            }
+        });
+
+        // 공유 기능
+        function sharePost(postId, postTitle) {
+            const postUrl = `${window.location.origin}/post/${postId}`;
+            
+            if (navigator.share) {
+                navigator.share({
+                    title: postTitle,
+                    text: `${postTitle} - 하루마틴`,
+                    url: postUrl
+                }).catch(err => console.log('공유 실패:', err));
+            } else {
+                // 클립보드에 URL 복사
+                navigator.clipboard.writeText(postUrl).then(() => {
+                    alert('링크가 클립보드에 복사되었습니다!');
+                }).catch(err => {
+                    console.error('복사 실패:', err);
+                    // 폴백: 프롬프트로 URL 표시
+                    prompt('링크를 복사하세요:', postUrl);
+                });
+            }
+        }
+
+        // 북마크 기능
+        function bookmarkTip(tipId) {
+            // 로컬 스토리지에 북마크 저장
+            let bookmarks = JSON.parse(localStorage.getItem('bookmarkedTips') || '[]');
+            
+            if (bookmarks.includes(tipId)) {
+                // 이미 북마크된 경우 제거
+                bookmarks = bookmarks.filter(id => id !== tipId);
+                alert('북마크에서 제거되었습니다.');
+            } else {
+                // 북마크 추가
+                bookmarks.push(tipId);
+                alert('북마크에 추가되었습니다!');
+            }
+            
+            localStorage.setItem('bookmarkedTips', JSON.stringify(bookmarks));
+            updateBookmarkButtons();
+        }
+
+        // 북마크 버튼 상태 업데이트
+        function updateBookmarkButtons() {
+            const bookmarks = JSON.parse(localStorage.getItem('bookmarkedTips') || '[]');
+            const bookmarkButtons = document.querySelectorAll('button[onclick^="bookmarkTip"]');
+            
+            bookmarkButtons.forEach(button => {
+                const tipId = button.getAttribute('onclick').match(/'([^']+)'/)[1];
+                const icon = button.querySelector('i');
+                
+                if (bookmarks.includes(tipId)) {
+                    icon.classList.remove('far');
+                    icon.classList.add('fas');
+                    button.style.backgroundColor = '#237c6c';
+                    button.style.color = 'white';
+                } else {
+                    icon.classList.remove('fas');
+                    icon.classList.add('far');
+                }
+            });
+        }
+
+        // 페이지 로드 시 북마크 상태 업데이트
+        document.addEventListener('DOMContentLoaded', function() {
+            updateBookmarkButtons();
+        });
+    </script>
+</body>
+</html> 

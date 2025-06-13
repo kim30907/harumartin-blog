@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>하루마틴 - 딸아이와의 하루를 기록하는 따뜻한 블로그</title>
+    <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'pretendard': ['Pretendard', 'system-ui', 'sans-serif'],
+                    },
+                    colors: {
+                        'primary': '#2E8B8B',
+                        'primary-hover': '#267373',
+                        'text-main': '#1F2D3D',
+                        'text-sub': '#B0B8C1',
+                        'bg-main': '#F5F4EF',
+                        'bg-card': '#FFFFFF',
+                        'border-light': '#E5E7EB',
+                        'accent': '#2E8B8B',
+                        'accent-hover': '#267373',
+                    },
+                    animation: {
+                        'float-slow': 'float-slow 8s ease-in-out infinite',
+                        'float-delayed': 'float-delayed 10s ease-in-out infinite 2s',
+                        'float-reverse': 'float-reverse 12s ease-in-out infinite',
+                        'float-slow-delayed': 'float-slow-delayed 9s ease-in-out infinite 3s',
+                        'float-gentle': 'float-gentle 7s ease-in-out infinite 1s',
+                        'float-reverse-delayed': 'float-reverse-delayed 11s ease-in-out infinite 4s',
+                    },
+                    keyframes: {
+                        'float-slow': {
+                            '0%, 100%': { transform: 'translateY(0px) rotate(0deg)' },
+                            '50%': { transform: 'translateY(-20px) rotate(2deg)' },
+                        },
+                        'float-delayed': {
+                            '0%, 100%': { transform: 'translateY(0px) rotate(0deg)' },
+                            '50%': { transform: 'translateY(-15px) rotate(-1deg)' },
+                        },
+                        'float-reverse': {
+                            '0%, 100%': { transform: 'translateY(-10px) rotate(1deg)' },
+                            '50%': { transform: 'translateY(10px) rotate(-2deg)' },
+                        },
+                        'float-slow-delayed': {
+                            '0%, 100%': { transform: 'translateY(0px) rotate(-1deg)' },
+                            '50%': { transform: 'translateY(-25px) rotate(1deg)' },
+                        },
+                        'float-gentle': {
+                            '0%, 100%': { transform: 'translateY(0px) rotate(0deg)' },
+                            '50%': { transform: 'translateY(-12px) rotate(1deg)' },
+                        },
+                        'float-reverse-delayed': {
+                            '0%, 100%': { transform: 'translateY(-5px) rotate(2deg)' },
+                            '50%': { transform: 'translateY(15px) rotate(-1deg)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="font-pretendard bg-bg-main text-text-main">
+    <!-- 헤더 -->
+    <header class="fixed top-0 left-0 right-0 z-50 bg-bg-main/95 backdrop-blur-sm border-b border-border-light">
+        <nav class="container mx-auto px-6 py-6">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center">
+                    <img src="/static/images/LOGO.png" alt="하루마틴 로고" class="h-14 w-auto mr-3">
+                    <h1 class="text-2xl font-semibold text-text-main">하루마틴</h1>
+                </div>
+                <ul class="hidden md:flex space-x-12">
+                    <li><a href="#home" class="font-medium text-text-main hover:text-primary transition-colors">Home</a></li>
+                    <li><a href="#martins-log" class="font-medium text-text-main hover:text-primary transition-colors">Martin's Log</a></li>
+                    <li><a href="#martins-tip" class="font-medium text-text-main hover:text-primary transition-colors">Martin's Tip</a></li>
+                    <li><a href="#about" class="font-medium text-text-main hover:text-primary transition-colors">About</a></li>
+                    <li><a href="/admin" class="font-medium text-text-main hover:text-primary transition-colors">Admin</a></li>
+                </ul>
+                <div class="md:hidden">
+                    <button class="text-text-main">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- 히어로 섹션 -->
+    <section id="home" class="relative min-h-screen overflow-hidden bg-gradient-to-br from-accent via-accent-hover to-accent">
+        <!-- 배경 이미지 -->
+        <div class="absolute inset-0">
+            <img src="/static/images/9.png" alt="히어로 배경" class="w-full h-full object-cover opacity-70">
+            <div class="absolute inset-0 bg-gradient-to-r from-black/30 via-black/20 to-black/30"></div>
+            <div class="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/10"></div>
+        </div>
+
+        <!-- 애니메이션 배경 요소들 -->
+        <div class="absolute inset-0 overflow-hidden">
+            <div class="absolute -top-40 -right-40 w-80 h-80 bg-accent rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-blob"></div>
+            <div class="absolute -bottom-40 -left-40 w-80 h-80 bg-accent-hover rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-blob animation-delay-2000"></div>
+            <div class="absolute top-40 left-40 w-80 h-80 bg-accent rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-blob animation-delay-4000"></div>
+        </div>
+
+        <!-- 메인 콘텐츠 -->
+        <div class="relative z-10 container mx-auto px-6 h-screen flex flex-col justify-start pt-[23vh]">
+            <div class="max-w-4xl">
+                <h1 class="text-5xl md:text-7xl font-bold mb-6 text-white" data-aos="fade-up" data-aos-duration="1000">
+                    하루마틴
+                </h1>
+                <p class="text-xl md:text-2xl text-white/90 mb-8 font-light" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
+                    딸아이와 함께하는 소중한 순간들을 기록합니다
+                </p>
+                <div class="flex flex-wrap gap-4" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="400">
+                    <a href="https://www.youtube.com/channel/UC3xaz_6w0aI0pVKuJ2gAXnA" 
+                       target="_blank"
+                       class="inline-flex items-center px-6 py-3 bg-white text-accent font-medium rounded-lg hover:bg-accent-hover hover:text-white transition-all duration-200">
+                        <i class="fab fa-youtube mr-2"></i>유튜브 채널
+                    </a>
+                    <a href="https://instagram.com/harumatin" 
+                       target="_blank"
+                       class="inline-flex items-center px-6 py-3 border-2 border-white text-white font-medium rounded-lg hover:bg-white hover:text-accent transition-all duration-200">
+                        <i class="fab fa-instagram mr-2"></i>인스타그램
+                    </a>
+                    <a href="https://threads.net/@harumatin" 
+                       target="_blank"
+                       class="inline-flex items-center px-6 py-3 border-2 border-white text-white font-medium rounded-lg hover:bg-white hover:text-accent transition-all duration-200">
+                        <i class="fab fa-threads mr-2"></i>쓰레드
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- 배경 패턴 -->
+        <div class="absolute inset-0 opacity-10">
+            <div class="absolute inset-0" style="background-image: radial-gradient(circle at 1px 1px, rgba(255,255,255,0.3) 1px, transparent 0); background-size: 50px 50px;"></div>
+        </div>
+    </section>
+
+    <!-- 메인 콘텐츠 -->
+    <main>
+        <!-- 오늘의 기록 섹션 -->
+        <section id="martins-log" class="py-24 bg-white">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-20" data-aos="fade-up" data-aos-duration="600">
+                    <div class="flex flex-col items-center gap-6">
+                        <h2 class="text-4xl font-light text-text-main">
+                            Martin's Log
+                        </h2>
+                        <p class="text-lg text-text-sub font-light max-w-2xl">
+                            딸아이와 함께한 소중한 순간들을 기록합니다
+                        </p>
+                        <a href="/martins-log" 
+                           class="inline-flex items-center px-6 py-3 border border-primary text-primary font-medium hover:bg-primary hover:text-white transition-colors">
+                            전체 보기 <i class="fas fa-arrow-right ml-2 text-sm"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+                    {% for post in recent_posts %}
+                    <article class="bg-bg-card border border-border-light hover:border-primary transition-colors group" 
+                             data-aos="fade-up" 
+                             data-aos-duration="600" 
+                             data-aos-delay="{{ loop.index0 * 100 }}">
+                        <div class="aspect-video bg-gray-100 overflow-hidden">
+                            <img src="{{ post.thumbnail }}" alt="{{ post.title }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        </div>
+                        <div class="p-8">
+                            <div class="text-sm text-text-sub mb-3 font-light">{{ post.date }}</div>
+                            <h3 class="text-xl font-medium mb-4 text-text-main leading-snug">{{ post.title }}</h3>
+                            <p class="text-text-sub leading-relaxed mb-6 font-light">{{ post.summary }}</p>
+                            <a href="/martins-log" 
+                               class="inline-flex items-center text-primary font-medium hover:text-primary-hover transition-colors">
+                                자세히 보기 <i class="fas fa-arrow-right ml-2 text-sm"></i>
+                            </a>
+                        </div>
+                    </article>
+                    {% endfor %}
+                </div>
+            </div>
+        </section>
+
+        <!-- 육아 꿀팁 섹션 -->
+        <section id="martins-tip" class="py-24 bg-bg-main">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-20" data-aos="fade-up" data-aos-duration="600">
+                    <div class="flex flex-col items-center gap-6">
+                        <h2 class="text-4xl font-light text-text-main">
+                            Martin's Tip
+                        </h2>
+                        <p class="text-lg text-text-sub font-light max-w-2xl">
+                            실전에서 터득한 육아 노하우를 공유합니다
+                        </p>
+                        <a href="/martins-tip" 
+                           class="inline-flex items-center px-6 py-3 border border-primary text-primary font-medium hover:bg-primary hover:text-white transition-colors">
+                            전체 보기 <i class="fas fa-arrow-right ml-2 text-sm"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+                    {% for tip in parenting_tips %}
+                    <div class="bg-bg-card border border-border-light hover:border-primary transition-colors group" 
+                         data-aos="fade-up" 
+                         data-aos-duration="600" 
+                         data-aos-delay="{{ loop.index0 * 100 }}">
+                        <div class="aspect-video bg-gray-100 overflow-hidden">
+                            <img src="{{ tip.thumbnail }}" alt="{{ tip.title }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        </div>
+                        <div class="p-8">
+                            <div class="inline-flex items-center px-3 py-1 bg-primary/10 text-primary text-sm font-medium mb-4">
+                                TIP
+                            </div>
+                            <h3 class="text-xl font-medium mb-4 text-text-main leading-snug">{{ tip.title }}</h3>
+                            <p class="text-text-sub leading-relaxed mb-6 font-light">{{ tip.summary }}</p>
+                            <a href="/martins-tip" 
+                               class="inline-flex items-center text-primary font-medium hover:text-primary-hover transition-colors">
+                                팁 보기 <i class="fas fa-arrow-right ml-2 text-sm"></i>
+                            </a>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </section>
+
+        <!-- 추천 영상 섹션 -->
+        <section class="py-24 bg-white">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-20" data-aos="fade-up" data-aos-duration="600">
+                    <div class="flex flex-col items-center gap-6">
+                        <h2 class="text-4xl font-light text-text-main">
+                            추천 영상
+                        </h2>
+                        <p class="text-lg text-text-sub font-light max-w-2xl">
+                            유튜브에서 더 많은 이야기를 만나보세요
+                        </p>
+                        <a href="https://www.youtube.com/channel/UC3xaz_6w0aI0pVKuJ2gAXnA" 
+                           target="_blank"
+                           class="inline-flex items-center px-6 py-3 border border-primary text-primary font-medium hover:bg-primary hover:text-white transition-colors">
+                            유튜브 채널 <i class="fas fa-external-link-alt ml-2 text-sm"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="grid md:grid-cols-2 gap-12 max-w-5xl mx-auto">
+                    {% for video in youtube_videos %}
+                    <div class="bg-bg-card border border-border-light hover:border-primary transition-colors group" 
+                         data-aos="fade-up" 
+                         data-aos-duration="600" 
+                         data-aos-delay="{{ loop.index0 * 200 }}">
+                        <div class="aspect-video bg-gray-100 overflow-hidden relative group cursor-pointer">
+                            <img src="{{ video.thumbnail }}" alt="{{ video.title }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                            <div class="absolute inset-0 bg-black/20 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                                <div class="w-16 h-16 bg-white/90 flex items-center justify-center text-primary text-2xl">
+                                    <i class="fas fa-play"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-8">
+                            <h3 class="text-xl font-medium mb-6 text-text-main leading-snug">{{ video.title }}</h3>
+                            <a href="{{ video.url }}" target="_blank" 
+                               class="inline-flex items-center text-primary font-medium hover:text-primary-hover transition-colors">
+                                유튜브에서 보기 <i class="fas fa-external-link-alt ml-2 text-sm"></i>
+                            </a>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </section>
+
+        <!-- 마무리 섹션 -->
+        <section class="py-24 bg-bg-main">
+            <div class="container mx-auto px-6 text-center">
+                <div class="max-w-4xl mx-auto" data-aos="fade-up" data-aos-duration="800">
+                    <h2 class="text-4xl md:text-5xl font-light mb-8 text-text-main leading-tight">
+                        오늘도 딸과의 하루를<br>
+                        소중히 담아갑니다
+                    </h2>
+                    <p class="text-xl text-text-sub mb-12 leading-relaxed font-light max-w-2xl mx-auto">
+                        매일매일 쌓여가는 소중한 추억들을 여러분과 함께 나누고 싶습니다
+                    </p>
+                    <a href="https://www.youtube.com/channel/UC3xaz_6w0aI0pVKuJ2gAXnA" 
+                       class="inline-flex items-center justify-center px-12 py-5 bg-primary text-white font-medium text-lg hover:bg-primary-hover transition-colors"
+                       target="_blank">
+                        브이로그 보러가기
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- About 섹션 -->
+    <section id="about" class="py-24 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-20" data-aos="fade-up" data-aos-duration="600">
+                <h2 class="text-4xl font-light mb-6 text-text-main">
+                    About Martin
+                </h2>
+            </div>
+            <div class="flex flex-col lg:flex-row items-center gap-16 max-w-6xl mx-auto">
+                <div class="lg:w-2/3" data-aos="fade-right" data-aos-duration="800">
+                    <h3 class="text-3xl font-light mb-8 text-text-main">안녕하세요, 아빠 마틴입니다</h3>
+                    <div class="space-y-6 text-lg text-text-sub leading-relaxed font-light">
+                        <p>
+                            5살 딸아이와 함께하는 일상을 기록하며, 육아의 소중한 순간들을 나누고 있습니다.
+                        </p>
+                        <p>
+                            매일매일 딸과 함께 성장해가는 이야기, 그리고 아빠로서 배워가는 육아 노하우를 
+                            따뜻한 시선으로 담아내고 있어요.
+                        </p>
+                        <p>
+                            여러분의 육아 여정에도 작은 도움이 되길 바라며, 함께 소통하고 공감할 수 있는 
+                            공간을 만들어가고 싶습니다.
+                        </p>
+                    </div>
+                </div>
+                <div class="lg:w-1/3" data-aos="fade-left" data-aos-duration="800" data-aos-delay="200">
+                    <div class="aspect-square bg-gray-100 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop&crop=face" 
+                             alt="Martin" 
+                             class="w-full h-full object-cover">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 푸터 -->
+    <footer class="py-16 bg-bg-main border-t border-border-light">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-center mb-12">
+                <div class="mb-8 md:mb-0 text-center md:text-left">
+                    <h3 class="text-2xl font-medium mb-4 text-text-main">하루마틴</h3>
+                    <div class="space-y-2 text-text-sub">
+                        <p>운영자: 아빠 마틴</p>
+                        <p>연락처: <a href="mailto:martin@harumatin.blog" class="hover:text-primary transition-colors">martin@harumatin.blog</a></p>
+                    </div>
+                </div>
+                <div class="flex space-x-8">
+                    <a href="https://instagram.com/harumatin" target="_blank" 
+                       class="w-12 h-12 border border-border-light flex items-center justify-center text-text-sub hover:border-primary hover:text-primary transition-colors">
+                        <i class="fab fa-instagram text-xl"></i>
+                    </a>
+                    <a href="https://www.youtube.com/channel/UC3xaz_6w0aI0pVKuJ2gAXnA" target="_blank" 
+                       class="w-12 h-12 border border-border-light flex items-center justify-center text-text-sub hover:border-primary hover:text-primary transition-colors">
+                        <i class="fab fa-youtube text-xl"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="text-center pt-8 border-t border-border-light">
+                <p class="text-text-sub font-light">&copy; 2025 하루마틴. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- AOS 초기화 스크립트 -->
+    <script>
+        // AOS (Animate On Scroll) 초기화
+        AOS.init({
+            duration: 600,
+            easing: 'ease-out-cubic',
+            once: true,
+            offset: 50
+        });
+
+        // 스크롤 시 헤더 배경 변화
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('header');
+            if (window.scrollY > 50) {
+                header.classList.add('bg-white/95');
+                header.classList.remove('bg-bg-main/95');
+            } else {
+                header.classList.add('bg-bg-main/95');
+                header.classList.remove('bg-white/95');
+            }
+        });
+
+        // 부드러운 스크롤
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+
+        <!-- 커스텀 스타일 -->
+    <style>
+        /* 모던 애니메이션 효과 */
+        @keyframes blob {
+            0% { transform: translate(0px, 0px) scale(1); }
+            33% { transform: translate(30px, -50px) scale(1.1); }
+            66% { transform: translate(-20px, 20px) scale(0.9); }
+            100% { transform: translate(0px, 0px) scale(1); }
+        }
+
+        .animate-blob {
+            animation: blob 7s infinite;
+        }
+
+        .animation-delay-2000 {
+            animation-delay: 2s;
+        }
+
+        .animation-delay-4000 {
+            animation-delay: 4s;
+        }
+
+        /* 글래스모피즘 효과 */
+        .backdrop-blur-sm {
+            backdrop-filter: blur(4px);
+        }
+
+        /* 스크롤바 스타일링 */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: #F5F4EF;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: #2E8B8B;
+            border-radius: 3px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: #267373;
+        }
+
+        /* 선택 텍스트 색상 */
+        ::selection {
+            background-color: rgba(46, 139, 139, 0.2);
+            color: #1F2D3D;
+        }
+
+        /* 부드러운 전환 효과 */
+        * {
+            transition: all 0.2s ease;
+        }
+
+        /* 이미지 로딩 효과 */
+        img {
+            transition: opacity 0.3s ease, transform 0.5s ease;
+        }
+
+        /* 호버 효과 최소화 */
+        .group:hover {
+            transform: none;
+        }
+    </style>
+</body>
+</html> 

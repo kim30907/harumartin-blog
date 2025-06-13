@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Martin's Log - 하루마틴</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'noto': ['Noto Sans KR', 'sans-serif'],
+                    },
+                    colors: {
+                        'primary': '#237c6c',
+                        'primary-hover': '#317f74',
+                        'text-main': '#23494d',
+                        'text-sub': '#76849c',
+                        'bg-main': '#faecd8',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="font-noto" style="background-color: #faecd8;">
+    <!-- 헤더 -->
+    <header class="fixed top-0 left-0 right-0 z-50" style="background-color: rgba(250, 236, 216, 0.95); backdrop-filter: blur(10px);">
+        <nav class="container mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-4">
+                    <div>
+                        <h1 class="text-2xl font-bold">
+                            <a href="/" style="color: #23494d; text-decoration: none;">하루마틴</a>
+                        </h1>
+                        <p class="text-sm" style="color: #76849c;">딸아이와 함께하는 일상, 따뜻한 하루의 기록</p>
+                    </div>
+                </div>
+                <ul class="hidden md:flex space-x-8">
+                    <li><a href="/" class="font-medium hover:opacity-80 transition-opacity" style="color: #23494d;">Home</a></li>
+                    <li><a href="/martins-log" class="font-bold border-b-2 pb-1" style="color: #237c6c; border-color: #237c6c;">Martin's Log</a></li>
+                    <li><a href="/martins-tip" class="font-medium hover:opacity-80 transition-opacity" style="color: #23494d;">Martin's Tip</a></li>
+                    <li><a href="/#about" class="font-medium hover:opacity-80 transition-opacity" style="color: #23494d;">About</a></li>
+                    <li><a href="/admin" class="font-medium hover:opacity-80 transition-opacity" style="color: #23494d;">Admin</a></li>
+                </ul>
+                <div class="md:hidden">
+                    <button class="text-2xl" style="color: #23494d;">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- 페이지 헤더 -->
+    <section class="pt-32 pb-16" style="background: linear-gradient(135deg, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0.1) 100%);">
+        <div class="container mx-auto px-6 text-center">
+            <h1 class="text-5xl font-bold mb-4" style="color: #23494d;">
+                <i class="fas fa-heart mr-4"></i>
+                Martin's Log
+            </h1>
+            <p class="text-xl mb-6" style="color: #76849c;">딸아이와 함께하는 소중한 일상을 기록합니다</p>
+            <div class="flex items-center justify-center space-x-2 text-sm" style="color: #76849c;">
+                <a href="/" class="hover:opacity-80" style="color: #237c6c;">Home</a> 
+                <i class="fas fa-chevron-right"></i> 
+                <span>Martin's Log</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- 메인 콘텐츠 -->
+    <main class="py-16">
+        <div class="container mx-auto px-6">
+            <!-- 필터 및 검색 -->
+            <div class="flex flex-col lg:flex-row justify-between items-center mb-12 gap-6">
+                <div class="flex flex-wrap gap-3">
+                    <button class="tag-filter px-4 py-2 rounded-full font-medium transition-all duration-200 active" 
+                            data-tag="all" 
+                            style="background-color: #237c6c; color: white;">
+                        전체
+                    </button>
+                    <button class="tag-filter px-4 py-2 rounded-full font-medium transition-all duration-200" 
+                            data-tag="요리" 
+                            style="background-color: white; color: #23494d; border: 2px solid #237c6c;"
+                            onmouseover="this.style.backgroundColor='#237c6c'; this.style.color='white'" 
+                            onmouseout="if(!this.classList.contains('active')) { this.style.backgroundColor='white'; this.style.color='#23494d'; }">
+                        요리
+                    </button>
+                    <button class="tag-filter px-4 py-2 rounded-full font-medium transition-all duration-200" 
+                            data-tag="놀이" 
+                            style="background-color: white; color: #23494d; border: 2px solid #237c6c;"
+                            onmouseover="this.style.backgroundColor='#237c6c'; this.style.color='white'" 
+                            onmouseout="if(!this.classList.contains('active')) { this.style.backgroundColor='white'; this.style.color='#23494d'; }">
+                        놀이
+                    </button>
+                    <button class="tag-filter px-4 py-2 rounded-full font-medium transition-all duration-200" 
+                            data-tag="성장" 
+                            style="background-color: white; color: #23494d; border: 2px solid #237c6c;"
+                            onmouseover="this.style.backgroundColor='#237c6c'; this.style.color='white'" 
+                            onmouseout="if(!this.classList.contains('active')) { this.style.backgroundColor='white'; this.style.color='#23494d'; }">
+                        성장
+                    </button>
+                    <button class="tag-filter px-4 py-2 rounded-full font-medium transition-all duration-200" 
+                            data-tag="일상" 
+                            style="background-color: white; color: #23494d; border: 2px solid #237c6c;"
+                            onmouseover="this.style.backgroundColor='#237c6c'; this.style.color='white'" 
+                            onmouseout="if(!this.classList.contains('active')) { this.style.backgroundColor='white'; this.style.color='#23494d'; }">
+                        일상
+                    </button>
+                    <button class="tag-filter px-4 py-2 rounded-full font-medium transition-all duration-200" 
+                            data-tag="첫경험" 
+                            style="background-color: white; color: #23494d; border: 2px solid #237c6c;"
+                            onmouseover="this.style.backgroundColor='#237c6c'; this.style.color='white'" 
+                            onmouseout="if(!this.classList.contains('active')) { this.style.backgroundColor='white'; this.style.color='#23494d'; }">
+                        첫경험
+                    </button>
+                </div>
+                <div class="relative">
+                    <input type="text" placeholder="포스트 검색..." 
+                           class="search-input pl-12 pr-4 py-3 rounded-2xl border-2 outline-none transition-all duration-200" 
+                           style="background-color: white; border-color: #237c6c; color: #23494d; width: 300px;"
+                           onfocus="this.style.boxShadow='0 0 0 3px rgba(35, 124, 108, 0.1)'"
+                           onblur="this.style.boxShadow='none'">
+                    <i class="fas fa-search absolute left-4 top-1/2 transform -translate-y-1/2" style="color: #76849c;"></i>
+                </div>
+            </div>
+
+            <!-- 포스트 그리드 -->
+            <div class="grid lg:grid-cols-2 gap-8 mb-16">
+                {% for post in posts %}
+                <article class="post-card-full bg-white rounded-3xl shadow-lg overflow-hidden transition-all duration-300 hover:shadow-xl hover:transform hover:scale-105" 
+                         data-tags="{{ post.tags|join(',') }}"
+                         style="border: 2px solid transparent;" 
+                         onmouseover="this.style.borderColor='#237c6c'" 
+                         onmouseout="this.style.borderColor='transparent'">
+                    <div class="relative">
+                        <img src="{{ post.thumbnail }}" alt="{{ post.title }}" class="w-full h-64 object-cover">
+                        <div class="absolute top-4 right-4 px-3 py-1 rounded-full text-sm font-medium text-white" 
+                             style="background-color: #237c6c;">
+                            {{ post.date }}
+                        </div>
+                        <div class="absolute bottom-4 left-4 flex flex-wrap gap-2">
+                            {% for tag in post.tags %}
+                            <span class="px-2 py-1 rounded-full text-xs font-medium text-white" 
+                                  style="background-color: rgba(35, 124, 108, 0.8);">
+                                #{{ tag }}
+                            </span>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-2xl font-bold mb-3" style="color: #23494d;">{{ post.title }}</h3>
+                        <p class="mb-4 leading-relaxed" style="color: #76849c;">{{ post.summary }}</p>
+                        <div class="mb-4 leading-relaxed" style="color: #76849c;">{{ post.content }}</div>
+                        <div class="flex items-center justify-between mb-6" style="color: #76849c;">
+                            <span class="flex items-center">
+                                <i class="fas fa-clock mr-2"></i> 3분 읽기
+                            </span>
+                            <span class="flex items-center">
+                                <i class="fas fa-eye mr-2"></i> 127
+                            </span>
+                        </div>
+                        <div class="flex gap-3">
+                            <a href="/post/{{ post.id }}" class="flex-1 px-4 py-3 text-white font-semibold rounded-2xl transition-all duration-200 hover:shadow-lg text-center" 
+                               style="background-color: #237c6c;" 
+                               onmouseover="this.style.backgroundColor='#317f74'" 
+                               onmouseout="this.style.backgroundColor='#237c6c'">
+                                <i class="fas fa-book-open mr-2"></i> 전체 읽기
+                            </a>
+                            <button onclick="sharePost('{{ post.id }}', '{{ post.title }}')" 
+                                    class="px-4 py-3 font-semibold rounded-2xl transition-all duration-200 border-2" 
+                                    style="color: #237c6c; border-color: #237c6c; background-color: white;" 
+                                    onmouseover="this.style.backgroundColor='#237c6c'; this.style.color='white'" 
+                                    onmouseout="this.style.backgroundColor='white'; this.style.color='#237c6c'"
+                                    title="공유하기">
+                                <i class="fas fa-share"></i>
+                            </button>
+                        </div>
+                    </div>
+                </article>
+                {% endfor %}
+            </div>
+
+            <!-- 페이지네이션 -->
+            <div class="flex items-center justify-center space-x-4">
+                <button class="px-4 py-2 rounded-2xl font-medium transition-all duration-200 opacity-50 cursor-not-allowed" 
+                        style="background-color: white; color: #76849c; border: 2px solid #76849c;" 
+                        disabled>
+                    <i class="fas fa-chevron-left mr-2"></i> 이전
+                </button>
+                <div class="flex space-x-2">
+                    <button class="w-10 h-10 rounded-full font-bold text-white transition-all duration-200" 
+                            style="background-color: #237c6c;">
+                        1
+                    </button>
+                    <button class="w-10 h-10 rounded-full font-medium transition-all duration-200 border-2" 
+                            style="background-color: white; color: #23494d; border-color: #237c6c;"
+                            onmouseover="this.style.backgroundColor='#237c6c'; this.style.color='white'" 
+                            onmouseout="this.style.backgroundColor='white'; this.style.color='#23494d'">
+                        2
+                    </button>
+                    <button class="w-10 h-10 rounded-full font-medium transition-all duration-200 border-2" 
+                            style="background-color: white; color: #23494d; border-color: #237c6c;"
+                            onmouseover="this.style.backgroundColor='#237c6c'; this.style.color='white'" 
+                            onmouseout="this.style.backgroundColor='white'; this.style.color='#23494d'">
+                        3
+                    </button>
+                </div>
+                <button class="px-4 py-2 rounded-2xl font-medium transition-all duration-200 border-2" 
+                        style="background-color: white; color: #237c6c; border-color: #237c6c;"
+                        onmouseover="this.style.backgroundColor='#237c6c'; this.style.color='white'" 
+                        onmouseout="this.style.backgroundColor='white'; this.style.color='#237c6c'">
+                    다음 <i class="fas fa-chevron-right ml-2"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- CTA 섹션 -->
+        <section class="py-20 mt-16" style="background-color: rgba(255, 255, 255, 0.3);">
+            <div class="container mx-auto px-6 text-center">
+                <div class="max-w-2xl mx-auto">
+                    <h2 class="text-4xl font-bold mb-4" style="color: #23494d;">더 많은 이야기가 궁금하다면?</h2>
+                    <p class="text-xl mb-8" style="color: #76849c;">유튜브에서 영상으로도 만나보세요!</p>
+                    <a href="https://www.youtube.com/channel/UC3xaz_6w0aI0pVKuJ2gAXnA" 
+                       class="inline-flex items-center justify-center px-12 py-5 text-white font-bold text-lg rounded-3xl transition-all duration-200 hover:shadow-xl transform hover:scale-105" 
+                       style="background-color: #237c6c;" 
+                       onmouseover="this.style.backgroundColor='#317f74'" 
+                       onmouseout="this.style.backgroundColor='#237c6c'"
+                       target="_blank">
+                        <i class="fab fa-youtube mr-3 text-xl"></i> 유튜브 채널 보기
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- 푸터 -->
+    <footer class="py-16" style="background-color: rgba(35, 73, 77, 0.05);">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-center mb-8">
+                <div class="mb-6 md:mb-0">
+                    <h3 class="text-2xl font-bold mb-2" style="color: #23494d;">하루마틴</h3>
+                    <p style="color: #76849c;">운영자: 아빠 마틴</p>
+                    <p style="color: #76849c;">연락처: <a href="mailto:martin@harumatin.blog" class="hover:opacity-80" style="color: #237c6c;">martin@harumatin.blog</a></p>
+                </div>
+                <div class="flex space-x-6">
+                    <a href="https://instagram.com/harumatin" target="_blank" 
+                       class="w-12 h-12 rounded-full flex items-center justify-center text-white text-xl transition-all duration-200 hover:transform hover:scale-110" 
+                       style="background-color: #237c6c;" 
+                       onmouseover="this.style.backgroundColor='#317f74'" 
+                       onmouseout="this.style.backgroundColor='#237c6c'">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="https://www.youtube.com/channel/UC3xaz_6w0aI0pVKuJ2gAXnA" target="_blank" 
+                       class="w-12 h-12 rounded-full flex items-center justify-center text-white text-xl transition-all duration-200 hover:transform hover:scale-110" 
+                       style="background-color: #237c6c;" 
+                       onmouseover="this.style.backgroundColor='#317f74'" 
+                       onmouseout="this.style.backgroundColor='#237c6c'">
+                        <i class="fab fa-youtube"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="text-center pt-8 border-t" style="border-color: rgba(35, 73, 77, 0.1);">
+                <p style="color: #76849c;">&copy; 2025 하루마틴. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // 태그 필터링 기능
+        document.addEventListener('DOMContentLoaded', function() {
+            const tagFilters = document.querySelectorAll('.tag-filter');
+            const postCards = document.querySelectorAll('.post-card-full');
+            const searchInput = document.querySelector('.search-input');
+
+            // 태그 필터
+            tagFilters.forEach(filter => {
+                filter.addEventListener('click', function() {
+                    const selectedTag = this.dataset.tag;
+                    
+                    // 활성 상태 변경
+                    tagFilters.forEach(f => {
+                        f.classList.remove('active');
+                        f.style.backgroundColor = 'white';
+                        f.style.color = '#23494d';
+                    });
+                    this.classList.add('active');
+                    this.style.backgroundColor = '#237c6c';
+                    this.style.color = 'white';
+                    
+                    // 포스트 필터링
+                    postCards.forEach(card => {
+                        const cardTags = card.dataset.tags.split(',');
+                        if (selectedTag === 'all' || cardTags.includes(selectedTag)) {
+                            card.style.display = 'block';
+                            setTimeout(() => {
+                                card.style.opacity = '1';
+                                card.style.transform = 'translateY(0)';
+                            }, 100);
+                        } else {
+                            card.style.opacity = '0';
+                            card.style.transform = 'translateY(20px)';
+                            setTimeout(() => {
+                                card.style.display = 'none';
+                            }, 300);
+                        }
+                    });
+                });
+            });
+
+            // 검색 기능
+            searchInput.addEventListener('input', function() {
+                const searchTerm = this.value.toLowerCase();
+                
+                postCards.forEach(card => {
+                    const title = card.querySelector('h3').textContent.toLowerCase();
+                    const content = card.querySelector('.mb-4').textContent.toLowerCase();
+                    
+                    if (title.includes(searchTerm) || content.includes(searchTerm)) {
+                        card.style.display = 'block';
+                        card.style.opacity = '1';
+                        card.style.transform = 'translateY(0)';
+                    } else {
+                        card.style.opacity = '0';
+                        card.style.transform = 'translateY(20px)';
+                        setTimeout(() => {
+                            card.style.display = 'none';
+                        }, 300);
+                    }
+                });
+            });
+        });
+
+        // 공유 기능
+        function sharePost(postId, postTitle) {
+            const postUrl = `${window.location.origin}/post/${postId}`;
+            
+            if (navigator.share) {
+                navigator.share({
+                    title: postTitle,
+                    text: `${postTitle} - 하루마틴`,
+                    url: postUrl
+                }).catch(err => console.log('공유 실패:', err));
+            } else {
+                // 클립보드에 URL 복사
+                navigator.clipboard.writeText(postUrl).then(() => {
+                    alert('링크가 클립보드에 복사되었습니다!');
+                }).catch(err => {
+                    console.error('복사 실패:', err);
+                    // 폴백: 프롬프트로 URL 표시
+                    prompt('링크를 복사하세요:', postUrl);
+                });
+            }
+        }
+    </script>
+</body>
+</html> 

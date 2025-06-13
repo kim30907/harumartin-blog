@@ -1,0 +1,21 @@
+[
+  {
+    "id": "a6ad1fc2-8d1d-4770-adaa-48bb11cdb37f",
+    "title": "안녕하세요 테스트 글입니다.",
+    "category": "daily-life",
+    "subcategory": "",
+    "content": "안녕하세요 테스트 글입니다.\n                                <div><br></div><div>안녕하세요 테스트 글입니다.</div><div><br></div><div>안녕하세요 테스트 글입니다.</div><div><br></div><div>안녕하세요 테스트 글입니다.</div><div><br></div><div>안녕하세요 테스트 글입니다.</div><div>안녕하세요 테스트 글입니다.</div><img src=\"/static/images/uploads/1_334ad19e.png\">",
+    "summary": "여행을 다녀왔어요",
+    "thumbnail": "/static/images/uploads/20250605_201804_f4374dba.jpg",
+    "tags": [
+      "여행",
+      "놀이동산",
+      "서울랜드"
+    ],
+    "date": "2025-06-08",
+    "created_at": "2025-06-08T23:32:32.718818",
+    "status": "발행됨",
+    "editor_type": "wysiwyg",
+    "post_type": "log"
+  }
+]
