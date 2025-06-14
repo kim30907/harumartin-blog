@@ -1,6 +1,6 @@
 import sys
 import os
-from flask import Flask, render_template, request, jsonify, session, redirect, url_for, flash
+from flask import Flask, render_template, request, jsonify, session, redirect, url_for, flash, send_from_directory
 from functools import wraps
 import json
 from datetime import datetime
@@ -35,6 +35,11 @@ def login_required(f):
             return redirect(url_for('admin_login'))
         return f(*args, **kwargs)
     return decorated_function
+
+# 정적 파일 서빙 라우트
+@app.route('/static/<path:filename>')
+def static_files(filename):
+    return send_from_directory('../static', filename)
 
 @app.route('/')
 def home():
