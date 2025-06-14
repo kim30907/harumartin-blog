@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>서버 오류 - 하루마틴</title>
+    <link rel="preconnect" href="https://cdn.jsdelivr.net">
+    <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.8/dist/web/static/pretendard.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'pretendard': ['Pretendard', '-apple-system', 'BlinkMacSystemFont', 'system-ui', 'Roboto', 'Helvetica Neue', 'Segoe UI', 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'sans-serif'],
+                    },
+                    colors: {
+                        'bg-main': '#F5F4EF',
+                        'text-main': '#1F2D3D',
+                        'text-sub': '#B0B8C1',
+                        'accent': '#2E8B8B',
+                        'accent-hover': '#236B6B',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="font-pretendard bg-bg-main min-h-screen flex items-center justify-center">
+    <div class="text-center max-w-md mx-4">
+        <div class="mb-8">
+            <i class="fas fa-server text-6xl text-red-500 mb-4"></i>
+            <h1 class="text-4xl font-bold text-text-main mb-4">500</h1>
+            <h2 class="text-2xl font-semibold text-text-main mb-4">서버 오류</h2>
+            <p class="text-text-sub mb-8">
+                일시적인 서버 오류가 발생했습니다. 잠시 후 다시 시도해주세요.
+            </p>
+        </div>
+        
+        <div class="space-y-4">
+            <a href="/" 
+               class="inline-flex items-center px-6 py-3 bg-accent text-white font-medium rounded-lg hover:bg-accent-hover transition-all duration-200">
+                <i class="fas fa-home mr-2"></i>
+                홈으로 돌아가기
+            </a>
+            
+            <div class="text-center">
+                <button onclick="location.reload()" 
+                        class="inline-flex items-center text-text-sub hover:text-accent transition-colors">
+                    <i class="fas fa-redo mr-2"></i>
+                    페이지 새로고침
+                </button>
+            </div>
+        </div>
+    </div>
+</body>
+</html> 

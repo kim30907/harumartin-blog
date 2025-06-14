@@ -1,0 +1,22 @@
+{
+  "daily-life": {
+    "name": "일상 기록",
+    "description": "딸아이와의 소중한 일상을 기록합니다",
+    "type": "log"
+  },
+  "growth": {
+    "name": "성장 기록",
+    "description": "딸아이의 성장 과정을 기록합니다",
+    "type": "log"
+  },
+  "parenting-tips": {
+    "name": "육아 꿀팁",
+    "description": "실용적인 육아 노하우를 공유합니다",
+    "type": "tip"
+  },
+  "baby-care": {
+    "name": "아기 돌보기",
+    "description": "아기 돌봄에 관한 팁을 공유합니다",
+    "type": "tip"
+  }
+}
