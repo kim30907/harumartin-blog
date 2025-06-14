@@ -40,12 +40,22 @@ def login_required(f):
 @app.route('/static/<path:filename>')
 def static_files(filename):
     try:
-        # 현재 파일의 디렉토리를 기준으로 static 폴더 경로 설정
-        current_dir = os.path.dirname(os.path.abspath(__file__))
-        static_dir = os.path.join(current_dir, '..', 'static')
+        # Vercel 환경에서의 절대 경로 설정
+        if os.environ.get('VERCEL'):
+            # Vercel 환경
+            static_dir = '/var/task/static'
+        else:
+            # 로컬 환경
+            current_dir = os.path.dirname(os.path.abspath(__file__))
+            static_dir = os.path.join(current_dir, '..', 'static')
+        
+        print(f"Trying to serve: {filename} from {static_dir}")
         return send_from_directory(static_dir, filename)
     except Exception as e:
         print(f"Static file error: {e}")
+        # 파일이 없으면 기본 이미지로 리다이렉트
+        if 'images/10.png' in filename:
+            return redirect('https://images.unsplash.com/photo-1544776527-6ca5d5ac9de8?w=1920&h=1080&fit=crop')
         return f"File not found: {filename}", 404
 
 @app.route('/')
