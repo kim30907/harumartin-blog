@@ -39,7 +39,14 @@ def login_required(f):
 # 정적 파일 서빙 라우트
 @app.route('/static/<path:filename>')
 def static_files(filename):
-    return send_from_directory('../static', filename)
+    try:
+        # 현재 파일의 디렉토리를 기준으로 static 폴더 경로 설정
+        current_dir = os.path.dirname(os.path.abspath(__file__))
+        static_dir = os.path.join(current_dir, '..', 'static')
+        return send_from_directory(static_dir, filename)
+    except Exception as e:
+        print(f"Static file error: {e}")
+        return f"File not found: {filename}", 404
 
 @app.route('/')
 def home():
