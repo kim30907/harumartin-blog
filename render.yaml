@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: harumartin-blog
+    env: python
+    buildCommand: "pip install -r requirements.txt"
+    startCommand: "gunicorn blogpage:app"
+    plan: free
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.9.7
+      - key: FLASK_ENV
+        value: production 
