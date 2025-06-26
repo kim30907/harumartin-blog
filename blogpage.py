@@ -418,8 +418,8 @@ def static_files(filename):
 def favicon():
     return app.send_static_file('favicon.ico')
 
-# Vercel 배포를 위한 app 인스턴스 노출
-app = app
+# Vercel 배포를 위한 WSGI 애플리케이션
+application = app
 
 if __name__ == '__main__':
     app.run(debug=False, host='0.0.0.0', port=5000)

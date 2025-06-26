@@ -13,10 +13,15 @@
     },
     {
       "src": "/(.*)",
-      "dest": "/blogpage.py"
+      "dest": "blogpage.py"
     }
   ],
   "env": {
     "FLASK_ENV": "production"
+  },
+  "functions": {
+    "blogpage.py": {
+      "runtime": "python3.9"
+    }
   }
 } 
