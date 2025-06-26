@@ -6,6 +6,7 @@
     <title>하루마틴 관리자</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap" rel="stylesheet">
     <script>
         tailwind.config = {
             theme: {
@@ -18,6 +19,193 @@
             }
         }
     </script>
+    <style>
+        .preview-content img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin: 16px 0;
+        }
+        .image-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 10px;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+        .image-item {
+            position: relative;
+            border: 2px solid transparent;
+            border-radius: 8px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .image-item:hover {
+            border-color: #2E8B8B;
+        }
+        .image-item.selected {
+            border-color: #2E8B8B;
+            background-color: #2E8B8B20;
+        }
+        .image-item img {
+            width: 100%;
+            height: 100px;
+            object-fit: cover;
+        }
+        .thumbnail-badge {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            background: #2E8B8B;
+            color: white;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 10px;
+        }
+    </style>
+    <style>
+        /* 전역 폰트 적용 */
+        body {
+            font-family: 'Gowun Dodum', sans-serif;
+        }
+        
+        /* 미리보기 영역 티스토리 스타일 적용 */
+        #preview-area .preview-content {
+            font-family: 'Gowun Dodum', sans-serif;
+            color: #333333;
+        }
+        
+        #preview-area .preview-content h1 {
+            color: #000000;
+            font-size: 32px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            margin-top: 0;
+        }
+        
+        #preview-area .preview-content h2 {
+            background-color: #333333;
+            border-radius: 8px;
+            padding: 10px;
+            margin: 1em 0;
+            color: #ffffff;
+            font-weight: bold;
+            font-size: 24px;
+            display: flex;
+            align-items: center;
+        }
+        #preview-area .preview-content h2::before {
+            content: '';
+            display: inline-block;
+            width: 8px;
+            height: 24px;
+            background-color: #808080;
+            margin-right: 8px;
+        }
+        
+        #preview-area .preview-content h3 {
+            color: #333333;
+            font-size: 23px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            margin-top: 20px;
+        }
+        #preview-area .preview-content h3::before {
+            content: '';
+            display: inline-block;
+            width: 5px;
+            height: 25px;
+            background-color: #333333;
+            margin-right: 8px;
+        }
+        
+        #preview-area .preview-content h4 {
+            color: #4D4D4D;
+            font-size: 20px;
+            margin-bottom: 10px;
+            margin-top: 16px;
+        }
+        
+        #preview-area .preview-content p {
+            color: #666666;
+            font-size: 16px;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+        
+        #preview-area .preview-content blockquote {
+            background-color: #f5f5f5;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 20px 0;
+            border-left: 4px solid #cccccc;
+            color: #666666;
+            font-style: normal;
+        }
+        
+        #preview-area .preview-content a {
+            color: #000000;
+            text-decoration: none;
+            font-weight: bold;
+            background-color: transparent;
+            transition: background-color 0.3s, color 0.3s;
+            padding: 3px 5px;
+        }
+        #preview-area .preview-content a:hover {
+            color: #ffffff;
+            background-color: #333333;
+        }
+        
+        #preview-area .preview-content table {
+            border-collapse: collapse;
+            width: 100%;
+            max-width: 600px;
+            text-align: center;
+            margin: 20px 0;
+        }
+        #preview-area .preview-content table th {
+            background-color: #555555;
+            color: #ffffff;
+            font-weight: bold;
+            padding: 8px;
+            border: 1px solid #333;
+        }
+        #preview-area .preview-content table td {
+            background-color: #ffffff;
+            color: #000000;
+            padding: 8px;
+            border: 1px solid #333;
+        }
+        
+        #preview-area .preview-content .text-box {
+            border: 1px solid #555;
+            padding: 15px;
+            background-color: #3a3a3a;
+            margin: 1em 0;
+            border-radius: 5px;
+            color: #ffffff;
+        }
+        
+        #preview-area .preview-content .alert-box {
+            border: none;
+            background-color: #4b000f;
+            padding: 15px;
+            margin: 1em 0;
+            color: #ffffff;
+            font-weight: bold;
+            border-radius: 5px;
+        }
+        
+        #preview-area .preview-content .qa-box {
+            border: 2px solid #333333;
+            padding: 15px;
+            background-color: #ffffff;
+            margin: 1em 0;
+            border-radius: 8px;
+        }
+    </style>
 </head>
 <body class="bg-gray-50">
     <!-- 헤더 -->
@@ -36,65 +224,324 @@
     </header>
 
     <!-- 메인 콘텐츠 -->
-    <main class="max-w-4xl mx-auto p-6">
-        <div class="bg-white rounded-lg shadow-sm p-6">
-            <h2 class="text-2xl font-semibold mb-6">관리자 대시보드</h2>
-            
-            <!-- 간단한 글쓰기 폼 -->
-            <div class="mb-8">
-                <h3 class="text-lg font-medium mb-4">새 글 작성</h3>
-                <form id="post-form" class="space-y-4">
-                    <div>
-                        <label class="block text-sm font-medium mb-2">제목</label>
-                        <input type="text" id="title" class="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-accent focus:border-accent">
+    <main class="max-w-7xl mx-auto p-6">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <!-- 왼쪽: 글 작성 폼 -->
+            <div class="bg-white rounded-lg shadow-sm p-6">
+                <h2 class="text-2xl font-semibold mb-6">새 글 작성</h2>
+                
+                <form id="post-form" class="space-y-6">
+                    <!-- 기본 정보 -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm font-medium mb-2">제목 *</label>
+                            <input type="text" id="title" required class="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-accent focus:border-accent">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium mb-2">타입 *</label>
+                            <select id="type" class="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-accent focus:border-accent">
+                                <option value="log">Martin's Log</option>
+                                <option value="tip">Martin's Tip</option>
+                            </select>
+                        </div>
                     </div>
                     
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm font-medium mb-2">카테고리 *</label>
+                            <select id="category" required class="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-accent focus:border-accent">
+                                <option value="daily-life">일상 기록</option>
+                                <option value="growth">성장 기록</option>
+                                <option value="parenting-tips">육아 꿀팁</option>
+                                <option value="baby-care">아기 돌보기</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium mb-2">상태</label>
+                            <select id="status" class="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-accent focus:border-accent">
+                                <option value="발행됨">즉시 발행</option>
+                                <option value="임시저장">임시저장</option>
+                                <option value="예약발행">예약발행</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- 예약발행 옵션 -->
+                    <div id="scheduled-options" class="hidden">
+                        <div class="p-4 bg-blue-50 border border-blue-200 rounded-lg">
+                            <h4 class="font-medium text-blue-800 mb-3">예약 발행 설정</h4>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-sm font-medium mb-2 text-blue-700">발행 날짜</label>
+                                    <input type="date" id="scheduled-date" class="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium mb-2 text-blue-700">발행 시간</label>
+                                    <input type="time" id="scheduled-time" class="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 이미지 업로드 섹션 -->
                     <div>
-                        <label class="block text-sm font-medium mb-2">타입</label>
-                        <select id="type" class="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-accent focus:border-accent">
-                            <option value="log">Martin's Log</option>
-                            <option value="tip">Martin's Tip</option>
-                        </select>
+                        <label class="block text-sm font-medium mb-2">이미지 첨부</label>
+                        <div class="space-y-3">
+                            <input type="file" id="image-upload" multiple accept="image/*" class="w-full px-3 py-2 border border-dashed border-gray-300 rounded-lg">
+                            <div id="uploaded-images" class="image-gallery"></div>
+                        </div>
+                    </div>
+
+                    <!-- 썸네일 선택 -->
+                    <div id="thumbnail-section" class="hidden">
+                        <label class="block text-sm font-medium mb-2">썸네일 선택</label>
+                        <p class="text-sm text-gray-600 mb-2">업로드된 이미지 중 썸네일로 사용할 이미지를 클릭하세요.</p>
+                        <div id="thumbnail-gallery" class="image-gallery"></div>
+                    </div>
+
+                    <!-- HTML 내용 편집 -->
+                    <div>
+                        <div class="flex items-center justify-between mb-2">
+                            <label class="block text-sm font-medium">HTML 내용 *</label>
+                            <div class="flex space-x-2">
+                                <button type="button" id="insert-image-btn" class="px-3 py-1 text-sm bg-green-500 text-white rounded hover:bg-green-600" disabled>
+                                    <i class="fas fa-image mr-1"></i>이미지 삽입
+                                </button>
+                                <button type="button" id="preview-btn" class="px-3 py-1 text-sm bg-blue-500 text-white rounded hover:bg-blue-600">
+                                    <i class="fas fa-eye mr-1"></i>미리보기
+                                </button>
+                            </div>
+                        </div>
+                        <textarea id="content" rows="8" required class="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-accent focus:border-accent font-mono text-sm" placeholder="HTML 코드를 입력하세요..."></textarea>
+                        <div class="mt-2 text-sm text-gray-500">
+                            <p>HTML 태그를 사용하여 내용을 작성하세요. 예: &lt;p&gt;, &lt;h1&gt;, &lt;img&gt;, &lt;a&gt; 등</p>
+                        </div>
                     </div>
                     
-                    <div>
-                        <label class="block text-sm font-medium mb-2">카테고리</label>
-                        <select id="category" class="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-accent focus:border-accent">
-                            <option value="daily-life">일상 기록</option>
-                            <option value="growth">성장 기록</option>
-                            <option value="parenting-tips">육아 꿀팁</option>
-                            <option value="baby-care">아기 돌보기</option>
-                        </select>
-                    </div>
-                    
-                    <div>
-                        <label class="block text-sm font-medium mb-2">내용</label>
-                        <textarea id="content" rows="6" class="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-accent focus:border-accent"></textarea>
-                    </div>
-                    
+                    <!-- 요약 -->
                     <div>
                         <label class="block text-sm font-medium mb-2">요약</label>
-                        <textarea id="summary" rows="3" class="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-accent focus:border-accent"></textarea>
+                        <textarea id="summary" rows="3" class="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-accent focus:border-accent" placeholder="글의 간단한 요약을 입력하세요..."></textarea>
                     </div>
                     
-                    <button type="submit" class="px-6 py-2 bg-accent text-white rounded-lg hover:bg-accent-hover">
-                        <i class="fas fa-save mr-2"></i>저장
-                    </button>
+                    <div class="flex space-x-3">
+                        <button type="submit" class="flex-1 px-6 py-3 bg-accent text-white rounded-lg hover:bg-accent-hover">
+                            <i class="fas fa-save mr-2"></i>저장
+                        </button>
+                        <button type="button" id="clear-btn" class="px-6 py-3 bg-gray-500 text-white rounded-lg hover:bg-gray-600">
+                            <i class="fas fa-eraser mr-2"></i>초기화
+                        </button>
+                    </div>
                 </form>
             </div>
 
-            <!-- 글 목록 -->
-            <div>
-                <h3 class="text-lg font-medium mb-4">최근 글</h3>
-                <div id="posts-list" class="space-y-3">
-                    <p class="text-gray-500">저장된 글이 없습니다.</p>
+            <!-- 오른쪽: 미리보기 및 글 목록 -->
+            <div class="space-y-6">
+                <!-- 미리보기 -->
+                <div class="bg-white rounded-lg shadow-sm p-6">
+                    <h3 class="text-lg font-medium mb-4">미리보기</h3>
+                    <div id="preview-area" class="min-h-[200px] p-4 border border-gray-200 rounded-lg bg-gray-50">
+                        <p class="text-gray-500 text-center">미리보기 버튼을 클릭하여 HTML 내용을 확인하세요.</p>
+                    </div>
+                </div>
+
+                <!-- 글 목록 -->
+                <div class="bg-white rounded-lg shadow-sm p-6">
+                    <h3 class="text-lg font-medium mb-4">최근 글</h3>
+                    <div id="posts-list" class="space-y-3">
+                        <p class="text-gray-500">저장된 글이 없습니다.</p>
+                    </div>
                 </div>
             </div>
         </div>
     </main>
 
+    <!-- 이미지 삽입 모달 -->
+    <div id="image-modal" class="hidden fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center">
+        <div class="bg-white rounded-lg p-6 max-w-4xl max-h-[80vh] overflow-auto">
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="text-lg font-medium">이미지 선택</h3>
+                <button id="close-modal" class="text-gray-500 hover:text-gray-700">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div id="modal-image-gallery" class="image-gallery"></div>
+            <div class="mt-4 text-sm text-gray-600">
+                <p>이미지를 클릭하면 HTML 코드가 커서 위치에 삽입됩니다.</p>
+            </div>
+        </div>
+    </div>
+
     <script>
-        // 간단한 글 저장 기능
+        let uploadedImages = [];
+        let selectedThumbnail = null;
+
+        // 상태 변경 시 예약발행 옵션 표시/숨김
+        document.getElementById('status').addEventListener('change', function() {
+            const scheduledOptions = document.getElementById('scheduled-options');
+            if (this.value === '예약발행') {
+                scheduledOptions.classList.remove('hidden');
+            } else {
+                scheduledOptions.classList.add('hidden');
+            }
+        });
+
+        // 이미지 업로드 처리
+        document.getElementById('image-upload').addEventListener('change', function(e) {
+            const files = e.target.files;
+            for (let file of files) {
+                uploadImage(file);
+            }
+        });
+
+        // 이미지 업로드 함수
+        function uploadImage(file) {
+            const formData = new FormData();
+            formData.append('file', file);
+
+            fetch('/api/upload-image', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    const imageInfo = {
+                        url: data.file_url,
+                        filename: data.filename,
+                        originalName: file.name
+                    };
+                    uploadedImages.push(imageInfo);
+                    updateImageGallery();
+                    updateThumbnailSection();
+                } else {
+                    alert('이미지 업로드 실패: ' + data.message);
+                }
+            })
+            .catch(error => {
+                console.error('Upload error:', error);
+                alert('이미지 업로드 중 오류가 발생했습니다.');
+            });
+        }
+
+        // 이미지 갤러리 업데이트
+        function updateImageGallery() {
+            const gallery = document.getElementById('uploaded-images');
+            const insertBtn = document.getElementById('insert-image-btn');
+            
+            if (uploadedImages.length === 0) {
+                gallery.innerHTML = '<p class="text-gray-500 text-sm">업로드된 이미지가 없습니다.</p>';
+                insertBtn.disabled = true;
+                return;
+            }
+
+            insertBtn.disabled = false;
+            gallery.innerHTML = uploadedImages.map((img, index) => `
+                <div class="image-item" onclick="selectImage(${index})">
+                    <img src="${img.url}" alt="${img.originalName}">
+                    <div class="absolute bottom-0 left-0 right-0 bg-black bg-opacity-75 text-white text-xs p-1 truncate">
+                        ${img.originalName}
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // 썸네일 섹션 업데이트
+        function updateThumbnailSection() {
+            const section = document.getElementById('thumbnail-section');
+            const gallery = document.getElementById('thumbnail-gallery');
+
+            if (uploadedImages.length === 0) {
+                section.classList.add('hidden');
+                return;
+            }
+
+            section.classList.remove('hidden');
+            gallery.innerHTML = uploadedImages.map((img, index) => `
+                <div class="image-item ${selectedThumbnail === index ? 'selected' : ''}" onclick="selectThumbnail(${index})">
+                    <img src="${img.url}" alt="${img.originalName}">
+                    ${selectedThumbnail === index ? '<div class="thumbnail-badge">썸네일</div>' : ''}
+                    <div class="absolute bottom-0 left-0 right-0 bg-black bg-opacity-75 text-white text-xs p-1 truncate">
+                        ${img.originalName}
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // 썸네일 선택
+        function selectThumbnail(index) {
+            selectedThumbnail = index;
+            updateThumbnailSection();
+        }
+
+        // 이미지 삽입 버튼
+        document.getElementById('insert-image-btn').addEventListener('click', function() {
+            if (uploadedImages.length === 0) return;
+            
+            const modal = document.getElementById('image-modal');
+            const modalGallery = document.getElementById('modal-image-gallery');
+            
+            modalGallery.innerHTML = uploadedImages.map((img, index) => `
+                <div class="image-item" onclick="insertImageToEditor(${index})">
+                    <img src="${img.url}" alt="${img.originalName}">
+                    <div class="absolute bottom-0 left-0 right-0 bg-black bg-opacity-75 text-white text-xs p-1 truncate">
+                        ${img.originalName}
+                    </div>
+                </div>
+            `).join('');
+            
+            modal.classList.remove('hidden');
+        });
+
+        // 모달 닫기
+        document.getElementById('close-modal').addEventListener('click', function() {
+            document.getElementById('image-modal').classList.add('hidden');
+        });
+
+        // 에디터에 이미지 삽입
+        function insertImageToEditor(index) {
+            const img = uploadedImages[index];
+            const textarea = document.getElementById('content');
+            const imgTag = `<img src="${img.url}" alt="${img.originalName}" class="img-fluid">`;
+            
+            const start = textarea.selectionStart;
+            const end = textarea.selectionEnd;
+            const text = textarea.value;
+            
+            textarea.value = text.substring(0, start) + imgTag + text.substring(end);
+            textarea.focus();
+            textarea.setSelectionRange(start + imgTag.length, start + imgTag.length);
+            
+            document.getElementById('image-modal').classList.add('hidden');
+        }
+
+        // 미리보기
+        document.getElementById('preview-btn').addEventListener('click', function() {
+            const content = document.getElementById('content').value;
+            const previewArea = document.getElementById('preview-area');
+            
+            if (!content.trim()) {
+                previewArea.innerHTML = '<p class="text-gray-500 text-center">내용을 입력해주세요.</p>';
+                return;
+            }
+            
+            previewArea.innerHTML = `<div class="preview-content">${content}</div>`;
+        });
+
+        // 초기화 버튼
+        document.getElementById('clear-btn').addEventListener('click', function() {
+            if (confirm('모든 내용을 초기화하시겠습니까?')) {
+                document.getElementById('post-form').reset();
+                uploadedImages = [];
+                selectedThumbnail = null;
+                updateImageGallery();
+                updateThumbnailSection();
+                document.getElementById('preview-area').innerHTML = '<p class="text-gray-500 text-center">미리보기 버튼을 클릭하여 HTML 내용을 확인하세요.</p>';
+                document.getElementById('scheduled-options').classList.add('hidden');
+            }
+        });
+
+        // 폼 제출
         document.getElementById('post-form').addEventListener('submit', function(e) {
             e.preventDefault();
             
@@ -104,8 +551,23 @@
                 content: document.getElementById('content').value,
                 summary: document.getElementById('summary').value,
                 post_type: document.getElementById('type').value,
-                status: '발행됨'
+                status: document.getElementById('status').value,
+                thumbnail: selectedThumbnail !== null ? uploadedImages[selectedThumbnail].url : '',
+                editor_type: 'html'
             };
+
+            // 예약발행인 경우 날짜/시간 추가
+            if (postData.status === '예약발행') {
+                const scheduledDate = document.getElementById('scheduled-date').value;
+                const scheduledTime = document.getElementById('scheduled-time').value;
+                
+                if (!scheduledDate || !scheduledTime) {
+                    alert('예약발행을 위해서는 날짜와 시간을 모두 선택해주세요.');
+                    return;
+                }
+                
+                postData.scheduled_datetime = `${scheduledDate} ${scheduledTime}`;
+            }
             
             fetch('/api/save-post', {
                 method: 'POST',
@@ -119,6 +581,12 @@
                 if (data.success) {
                     alert('글이 저장되었습니다!');
                     document.getElementById('post-form').reset();
+                    uploadedImages = [];
+                    selectedThumbnail = null;
+                    updateImageGallery();
+                    updateThumbnailSection();
+                    document.getElementById('preview-area').innerHTML = '<p class="text-gray-500 text-center">미리보기 버튼을 클릭하여 HTML 내용을 확인하세요.</p>';
+                    document.getElementById('scheduled-options').classList.add('hidden');
                     loadPosts();
                 } else {
                     alert('저장 실패: ' + data.message);
@@ -132,13 +600,20 @@
 
         // 글 목록 로드
         function loadPosts() {
-            // 메모리 기반이므로 새로고침 시 초기화됨
             const postsList = document.getElementById('posts-list');
             postsList.innerHTML = '<p class="text-gray-500">저장된 글이 없습니다. (메모리 기반 저장)</p>';
         }
 
         // 페이지 로드 시 글 목록 로드
         loadPosts();
+
+        // 날짜 기본값 설정 (오늘 날짜)
+        const today = new Date();
+        const tomorrow = new Date(today);
+        tomorrow.setDate(tomorrow.getDate() + 1);
+        
+        document.getElementById('scheduled-date').value = tomorrow.toISOString().split('T')[0];
+        document.getElementById('scheduled-time').value = '09:00';
     </script>
 </body>
 </html> 

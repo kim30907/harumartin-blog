@@ -6,6 +6,7 @@
     <title>하루마틴 - 딸아이와 함께하는 소중한 순간들</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap" rel="stylesheet">
     <script>
         tailwind.config = {
             theme: {
@@ -13,13 +14,22 @@
                     colors: {
                         'accent': '#2E8B8B',
                         'accent-hover': '#236B6B',
+                    },
+                    fontFamily: {
+                        'body': ['Gowun Dodum', 'sans-serif'],
                     }
                 }
             }
         }
     </script>
+    <style>
+        /* 전역 폰트 적용 */
+        body {
+            font-family: 'Gowun Dodum', sans-serif;
+        }
+    </style>
 </head>
-<body class="bg-gray-50">
+<body class="bg-gray-50 font-body">
     <!-- 헤더 -->
     <header class="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm border-b">
         <nav class="container mx-auto px-6 py-4">
@@ -39,11 +49,8 @@
     </header>
 
     <!-- 히어로 섹션 -->
-    <section id="home" class="relative min-h-screen overflow-hidden bg-gradient-to-br from-accent via-accent-hover to-accent">
-        <div class="absolute inset-0">
-            <img src="https://images.unsplash.com/photo-1544776527-6ca5d5ac9de8?w=1920&h=1080&fit=crop" alt="히어로 배경" class="w-full h-full object-cover opacity-70">
-            <div class="absolute inset-0 bg-gradient-to-r from-black/30 via-black/20 to-black/30"></div>
-        </div>
+    <section id="home" class="relative min-h-screen overflow-hidden" style="background-image: url('/static/images/12.png') !important; background-size: cover !important; background-position: center !important; background-repeat: no-repeat !important;">
+        <div class="absolute inset-0 bg-black/40"></div>
 
         <div class="relative z-10 container mx-auto px-6 h-screen flex flex-col justify-start pt-[23vh]">
             <div class="max-w-4xl">
@@ -54,11 +61,11 @@
                        class="inline-flex items-center px-6 py-3 bg-white text-accent font-medium rounded-lg hover:bg-accent-hover hover:text-white transition-all duration-200">
                         <i class="fab fa-youtube mr-2"></i>유튜브 채널
                     </a>
-                    <a href="https://instagram.com/harumatin" target="_blank"
+                    <a href="https://www.instagram.com/harumartin88/" target="_blank"
                        class="inline-flex items-center px-6 py-3 border-2 border-white text-white font-medium rounded-lg hover:bg-white hover:text-accent transition-all duration-200">
                         <i class="fab fa-instagram mr-2"></i>인스타그램
                     </a>
-                    <a href="https://threads.net/@harumatin" target="_blank"
+                    <a href="https://threads.net/@harumartin88" target="_blank"
                        class="inline-flex items-center px-6 py-3 border-2 border-white text-white font-medium rounded-lg hover:bg-white hover:text-accent transition-all duration-200">
                         <i class="fab fa-threads mr-2"></i>쓰레드
                     </a>
@@ -87,8 +94,8 @@
                         <div class="p-6">
                             <div class="text-sm text-gray-500 mb-2">{{ post.date }}</div>
                             <h3 class="text-xl font-medium mb-3">{{ post.title }}</h3>
-                            <p class="text-gray-600 mb-4">{{ post.summary }}</p>
-                            <a href="#" class="text-accent hover:text-accent-hover font-medium">자세히 보기 →</a>
+                            <p class="text-gray-600 mb-4">{{ post.summary or (post.content|striptags)[:100] + '...' if post.content|length > 100 else post.content|striptags }}</p>
+                            <a href="/post/{{ post.id }}" class="text-accent hover:text-accent-hover font-medium">자세히 보기 →</a>
                         </div>
                     </article>
                     {% endfor %}
@@ -105,7 +112,7 @@
                 </div>
                 
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    {% for tip in parenting_tips %}
+                    {% for tip in parenting_tips %}image.png
                     <div class="bg-white border rounded-lg overflow-hidden hover:shadow-lg transition-shadow">
                         <div class="aspect-video bg-gray-100">
                             <img src="{{ tip.thumbnail or 'https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?w=400&h=250&fit=crop' }}" 
@@ -114,8 +121,8 @@
                         <div class="p-6">
                             <div class="inline-flex items-center px-3 py-1 bg-accent/10 text-accent text-sm font-medium mb-3 rounded-full">TIP</div>
                             <h3 class="text-xl font-medium mb-3">{{ tip.title }}</h3>
-                            <p class="text-gray-600 mb-4">{{ tip.summary }}</p>
-                            <a href="#" class="text-accent hover:text-accent-hover font-medium">팁 보기 →</a>
+                            <p class="text-gray-600 mb-4">{{ tip.summary or (tip.content|striptags)[:100] + '...' if tip.content|length > 100 else tip.content|striptags }}</p>
+                            <a href="/post/{{ tip.id }}" class="text-accent hover:text-accent-hover font-medium">팁 보기 →</a>
                         </div>
                     </div>
                     {% endfor %}
@@ -130,7 +137,7 @@
             <h3 class="text-2xl font-medium mb-4">하루마틴</h3>
             <p class="text-gray-400 mb-8">딸아이와 함께하는 소중한 순간들을 기록합니다</p>
             <div class="flex justify-center space-x-6">
-                <a href="https://instagram.com/harumatin" target="_blank" class="text-gray-400 hover:text-white">
+                <a href="https://www.instagram.com/harumartin88/" target="_blank" class="text-gray-400 hover:text-white">
                     <i class="fab fa-instagram text-2xl"></i>
                 </a>
                 <a href="https://www.youtube.com/channel/UC3xaz_6w0aI0pVKuJ2gAXnA" target="_blank" class="text-gray-400 hover:text-white">

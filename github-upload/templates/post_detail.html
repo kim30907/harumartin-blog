@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ post.title }} - 하루마틴</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'accent': '#2E8B8B',
+                        'accent-hover': '#236B6B',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* 전역 폰트 적용 */
+        body {
+            font-family: 'Gowun Dodum', sans-serif;
+        }
+        
+        .post-content {
+            font-family: 'Gowun Dodum', sans-serif;
+            color: #333333;
+        }
+        
+        /* 이미지 스타일 */
+        .post-content img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin: 16px 0;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* 페이지 제목 (h1) */
+        .post-content h1 {
+            color: #000000;
+            font-size: 32px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            margin-top: 0;
+        }
+        
+        /* 주요 섹션 제목 (h2) - 모서리가 둥근 상자 */
+        .post-content h2 {
+            background-color: #333333;
+            border-radius: 8px;
+            padding: 10px;
+            margin: 1em 0;
+            color: #ffffff;
+            font-weight: bold;
+            font-size: 24px;
+            display: flex;
+            align-items: center;
+        }
+        .post-content h2::before {
+            content: '';
+            display: inline-block;
+            width: 8px;
+            height: 24px;
+            background-color: #808080;
+            margin-right: 8px;
+        }
+        
+        /* 섹션 내 하위 제목 (h3) */
+        .post-content h3 {
+            color: #333333;
+            font-size: 23px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            margin-top: 20px;
+        }
+        .post-content h3::before {
+            content: '';
+            display: inline-block;
+            width: 5px;
+            height: 25px;
+            background-color: #333333;
+            margin-right: 8px;
+        }
+        
+        /* 일반 소제목 (h4) */
+        .post-content h4 {
+            color: #4D4D4D;
+            font-size: 20px;
+            margin-bottom: 10px;
+            margin-top: 16px;
+        }
+        
+        /* 본문 단락 */
+        .post-content p {
+            color: #666666;
+            font-size: 16px;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+        
+        /* 강조 텍스트 */
+        .post-content .emphasis {
+            font-style: italic;
+            font-weight: bold;
+            color: #000000;
+        }
+        
+        .post-content b, .post-content strong {
+            color: #000000;
+            font-weight: bold;
+        }
+        
+        /* 인용문 박스 */
+        .post-content blockquote {
+            background-color: #f5f5f5;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 20px 0;
+            border-left: 4px solid #cccccc;
+            color: #666666;
+            font-style: normal;
+        }
+        
+        /* 목록 스타일 */
+        .post-content ul, .post-content ol {
+            margin-bottom: 16px;
+            padding-left: 24px;
+            color: #666666;
+        }
+        .post-content li {
+            margin-bottom: 8px;
+            line-height: 1.6;
+        }
+        
+        /* 링크 스타일 */
+        .post-content a {
+            color: #000000;
+            text-decoration: none;
+            font-weight: bold;
+            background-color: transparent;
+            transition: background-color 0.3s, color 0.3s;
+            padding: 3px 5px;
+        }
+        .post-content a:hover {
+            color: #ffffff;
+            background-color: #333333;
+        }
+        
+        /* 표 스타일 */
+        .post-content table {
+            border-collapse: collapse;
+            width: 100%;
+            max-width: 600px;
+            text-align: center;
+            margin: 20px 0;
+        }
+        .post-content table th {
+            background-color: #555555;
+            color: #ffffff;
+            font-weight: bold;
+            padding: 8px;
+            border: 1px solid #333;
+        }
+        .post-content table td {
+            background-color: #ffffff;
+            color: #000000;
+            padding: 8px;
+            border: 1px solid #333;
+        }
+        
+        /* 구분선 (점 3개) */
+        .divider-dots {
+            margin: 20px 0;
+            text-align: center;
+        }
+        .divider-dot {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            background-color: #dddddd;
+            border-radius: 50%;
+            margin: 0 4px;
+        }
+        
+        /* 글상자 */
+        .text-box {
+            border: 1px solid #555;
+            padding: 15px;
+            background-color: #3a3a3a;
+            margin: 1em 0;
+            border-radius: 5px;
+        }
+        .text-box p {
+            color: #ffffff !important;
+            margin: 0;
+        }
+        
+        /* 경고/주의 상자 */
+        .alert-box {
+            border: none;
+            background-color: #4b000f;
+            padding: 15px;
+            margin: 1em 0;
+            color: #ffffff;
+            font-weight: bold;
+            border-radius: 5px;
+        }
+        
+        /* Q&A 스타일 */
+        .qa-box {
+            border: 2px solid #333333;
+            padding: 15px;
+            background-color: #ffffff;
+            margin: 1em 0;
+            border-radius: 8px;
+        }
+        .qa-box .question {
+            font-weight: bold;
+            color: #000000;
+            line-height: 1.8;
+            margin-bottom: 0.5em;
+        }
+        .qa-box .answer {
+            color: #000000;
+            line-height: 1.8;
+            margin: 0;
+        }
+        
+        /* 목차 스타일 */
+        .toc-title {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+            color: #000000;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .toc-title::before {
+            content: '';
+            display: inline-block;
+            width: 8px;
+            height: 24px;
+            background-color: #000;
+            margin-right: 8px;
+        }
+        
+        .toc-box {
+            border: 1px solid #ccc;
+            padding: 15px;
+            background-color: #f5f5f5;
+            margin-bottom: 1em;
+            border-radius: 5px;
+            color: #333;
+        }
+        .toc-box ul li {
+            transition: font-weight 0.2s;
+            text-decoration: underline;
+            letter-spacing: 1px;
+            line-height: 1.6;
+            cursor: pointer;
+        }
+        .toc-box ul li:hover {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- 헤더 -->
+    <header class="bg-white shadow-sm border-b sticky top-0 z-10">
+        <nav class="container mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center">
+                    <a href="/" class="flex items-center">
+                        <img src="/static/images/logo.png" alt="하루마틴 로고" class="h-8 w-auto mr-3">
+                        <h1 class="text-lg font-semibold">하루마틴</h1>
+                    </a>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <a href="/" class="text-gray-600 hover:text-accent">
+                        <i class="fas fa-home mr-2"></i>홈
+                    </a>
+                    <a href="/#martins-log" class="text-gray-600 hover:text-accent">Martin's Log</a>
+                    <a href="/#martins-tip" class="text-gray-600 hover:text-accent">Martin's Tip</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- 메인 콘텐츠 -->
+    <main class="container mx-auto px-6 py-8">
+        <div class="max-w-4xl mx-auto">
+            <!-- 포스트 헤더 -->
+            <div class="bg-white rounded-lg shadow-sm p-8 mb-6">
+                <div class="mb-6">
+                    <div class="flex items-center space-x-4 mb-4">
+                        {% if post.post_type == 'tip' %}
+                        <span class="inline-flex items-center px-3 py-1 bg-accent/10 text-accent text-sm font-medium rounded-full">
+                            <i class="fas fa-lightbulb mr-1"></i>TIP
+                        </span>
+                        {% else %}
+                        <span class="inline-flex items-center px-3 py-1 bg-blue-100 text-blue-800 text-sm font-medium rounded-full">
+                            <i class="fas fa-heart mr-1"></i>LOG
+                        </span>
+                        {% endif %}
+                        
+                        <span class="text-sm text-gray-500">{{ post.date }}</span>
+                        
+                        {% if post.status == '예약됨' %}
+                        <span class="inline-flex items-center px-2 py-1 bg-orange-100 text-orange-800 text-xs font-medium rounded">
+                            <i class="fas fa-clock mr-1"></i>예약됨
+                        </span>
+                        {% endif %}
+                    </div>
+                    
+                    <h1 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">{{ post.title }}</h1>
+                    
+                    {% if post.summary %}
+                    <p class="text-lg text-gray-600 leading-relaxed">{{ post.summary }}</p>
+                    {% endif %}
+                </div>
+                
+                <!-- 썸네일 이미지 -->
+                {% if post.thumbnail %}
+                <div class="mb-6">
+                    <img src="{{ post.thumbnail }}" alt="{{ post.title }}" 
+                         class="w-full max-h-96 object-cover rounded-lg shadow-lg">
+                </div>
+                {% endif %}
+            </div>
+
+            <!-- 포스트 내용 -->
+            <div class="bg-white rounded-lg shadow-sm p-8 mb-6">
+                <div class="post-content prose prose-lg max-w-none">
+                    {{ post.content|safe }}
+                </div>
+            </div>
+
+            <!-- 네비게이션 및 공유 -->
+            <div class="bg-white rounded-lg shadow-sm p-6">
+                <div class="flex flex-col md:flex-row items-center justify-between space-y-4 md:space-y-0">
+                    <div class="flex items-center space-x-4">
+                        <a href="/" class="inline-flex items-center px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors">
+                            <i class="fas fa-arrow-left mr-2"></i>홈으로 돌아가기
+                        </a>
+                        
+                        {% if post.post_type == 'log' %}
+                        <a href="/#martins-log" class="inline-flex items-center px-4 py-2 bg-blue-100 text-blue-700 rounded-lg hover:bg-blue-200 transition-colors">
+                            <i class="fas fa-list mr-2"></i>더 많은 로그 보기
+                        </a>
+                        {% else %}
+                        <a href="/#martins-tip" class="inline-flex items-center px-4 py-2 bg-accent/10 text-accent rounded-lg hover:bg-accent/20 transition-colors">
+                            <i class="fas fa-lightbulb mr-2"></i>더 많은 팁 보기
+                        </a>
+                        {% endif %}
+                    </div>
+                    
+                    <div class="flex items-center space-x-3">
+                        <span class="text-sm text-gray-500">공유하기:</span>
+                        <a href="https://www.instagram.com/harumartin88/" target="_blank" 
+                           class="text-pink-500 hover:text-pink-600 transition-colors">
+                            <i class="fab fa-instagram text-xl"></i>
+                        </a>
+                        <a href="https://www.youtube.com/channel/UC3xaz_6w0aI0pVKuJ2gAXnA" target="_blank" 
+                           class="text-red-500 hover:text-red-600 transition-colors">
+                            <i class="fab fa-youtube text-xl"></i>
+                        </a>
+                        <button onclick="copyToClipboard()" 
+                                class="text-gray-500 hover:text-gray-600 transition-colors">
+                            <i class="fas fa-link text-xl"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- 푸터 -->
+    <footer class="mt-16 py-8 bg-gray-900 text-white">
+        <div class="container mx-auto px-6 text-center">
+            <h3 class="text-lg font-medium mb-2">하루마틴</h3>
+            <p class="text-gray-400 mb-4">딸아이와 함께하는 소중한 순간들을 기록합니다</p>
+            <div class="flex justify-center space-x-4">
+                <a href="https://www.instagram.com/harumartin88/" target="_blank" class="text-gray-400 hover:text-white">
+                    <i class="fab fa-instagram text-xl"></i>
+                </a>
+                <a href="https://www.youtube.com/channel/UC3xaz_6w0aI0pVKuJ2gAXnA" target="_blank" class="text-gray-400 hover:text-white">
+                    <i class="fab fa-youtube text-xl"></i>
+                </a>
+            </div>
+            <div class="mt-4 pt-4 border-t border-gray-800 text-gray-400 text-sm">
+                <p>&copy; 2025 하루마틴. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // URL 복사 기능
+        function copyToClipboard() {
+            navigator.clipboard.writeText(window.location.href).then(function() {
+                alert('링크가 클립보드에 복사되었습니다!');
+            }, function(err) {
+                console.error('링크 복사 실패: ', err);
+            });
+        }
+
+        // 이미지 로딩 에러 처리
+        document.addEventListener('DOMContentLoaded', function() {
+            const images = document.querySelectorAll('.post-content img');
+            images.forEach(img => {
+                img.addEventListener('error', function() {
+                    this.style.display = 'none';
+                });
+            });
+        });
+    </script>
+</body>
+</html> 

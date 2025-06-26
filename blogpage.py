@@ -7,7 +7,7 @@ import uuid
 from functools import wraps
 
 app = Flask(__name__)
-app.secret_key = 'harumatin-secret-key-2025'  # 실제 운영시에는 환경변수로 설정하세요
+app.secret_key = 'harumartin88-secret-key-2025'  # 실제 운영시에는 환경변수로 설정하세요
 
 # 관리자 계정 정보
 ADMIN_ID = 'kim30907'

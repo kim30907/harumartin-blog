@@ -6,8 +6,8 @@ from werkzeug.utils import secure_filename
 import uuid
 from functools import wraps
 
-app = Flask(__name__)
-app.secret_key = 'harumatin-secret-key-2025'  # 실제 운영시에는 환경변수로 설정하세요
+app = Flask(__name__, static_folder='static', static_url_path='/static')
+app.secret_key = 'harumartin88-secret-key-2025'  # 실제 운영시에는 환경변수로 설정하세요
 
 # 관리자 계정 정보
 ADMIN_ID = 'kim30907'
@@ -22,11 +22,11 @@ def login_required(f):
         return f(*args, **kwargs)
     return decorated_function
 
-# 설정 - Serverless 환경에 맞게 수정
-UPLOAD_FOLDER = '/tmp/uploads'  # Serverless에서는 /tmp만 쓰기 가능
+# 설정 - 로컬 환경에 맞게 수정
+UPLOAD_FOLDER = 'static/images/uploads'  # 로컬 환경에서는 static 폴더 사용
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif', 'webp'}
 
-# 디렉토리 생성 (Serverless에서는 /tmp만 가능)
+# 디렉토리 생성
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 
 # 파일 확장자 확인
@@ -176,31 +176,8 @@ def post_detail(post_id):
     if not post:
         return render_template('404.html'), 404
     
-    # 간단한 포스트 상세 페이지
-    return f"""
-    <!DOCTYPE html>
-    <html lang="ko">
-    <head>
-        <meta charset="UTF-8">
-        <title>{post.get('title', '제목 없음')} - 하루마틴</title>
-        <script src="https://cdn.tailwindcss.com"></script>
-    </head>
-    <body class="bg-gray-50">
-        <div class="max-w-4xl mx-auto p-6">
-            <div class="bg-white rounded-lg shadow-sm p-8">
-                <h1 class="text-3xl font-bold mb-4">{post.get('title', '제목 없음')}</h1>
-                <div class="text-gray-500 mb-6">{post.get('date', '')}</div>
-                <div class="prose max-w-none">
-                    {post.get('content', '내용이 없습니다.')}
-                </div>
-                <div class="mt-8">
-                    <a href="/" class="text-blue-600 hover:text-blue-800">← 홈으로 돌아가기</a>
-                </div>
-            </div>
-        </div>
-    </body>
-    </html>
-    """
+    # 포스트 상세 페이지 템플릿으로 렌더링
+    return render_template('post_detail.html', post=post)
 
 # 글 저장 API
 @app.route('/api/save-post', methods=['POST'])
@@ -242,6 +219,14 @@ def save_post():
             post['post_type'] = 'tip'
         else:
             post['post_type'] = 'log'
+        
+        # 예약발행 처리
+        if data.get('status') == '예약발행':
+            post['scheduled_datetime'] = data.get('scheduled_datetime', '')
+            post['status'] = '예약됨'  # 예약 상태로 저장
+        
+        # HTML 에디터 타입 저장
+        post['editor_type'] = data.get('editor_type', 'wysiwyg')
         
         posts.append(post)
         save_posts(posts)
@@ -430,4 +415,4 @@ def favicon():
 app = app
 
 if __name__ == '__main__':
-    app.run(debug=False, host='0.0.0.0', port=5000)
+    app.run(debug=True, host='127.0.0.1', port=8080)

@@ -45,7 +45,7 @@
 ### 1. 저장소 클론
 ```bash
 git clone <repository-url>
-cd harumatin-blog
+cd harumartin88-blog
 ```
 
 ### 2. 가상환경 생성 및 활성화
@@ -77,7 +77,7 @@ http://localhost:5000
 ## 프로젝트 구조
 
 ```
-harumatin-blog/
+harumartin88-blog/
 ├── blogpage.py              # Flask 메인 애플리케이션
 ├── requirements.txt         # Python 패키지 의존성
 ├── README.md               # 프로젝트 문서
@@ -153,9 +153,9 @@ recent_posts = [
 
 - **블로그**: 하루마틴
 - **운영자**: 아빠 마틴
-- **이메일**: martin@harumatin.blog
-- **인스타그램**: [@harumatin](https://instagram.com/harumatin)
-- **유튜브**: [@harumatin](https://youtube.com/@harumatin)
+- **이메일**: martin@harumartin88.blog
+- **인스타그램**: [@harumartin88](https://instagram.com/harumartin88)
+- **유튜브**: [@harumartin88](https://youtube.com/@harumartin88)
 
 ---
 
